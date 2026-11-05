@@ -230,6 +230,14 @@ def collect(source_root: Path, web_root: Path) -> tuple[list[Entry], Counter]:
         if path.is_file() and not linked(path):
             destination = "docs/illustrations/" + name
             entries[destination] = Entry(path, "synthetic-preview", name, destination, path.read_bytes())
+    # Manually inspected interface-only captures: no child, account, PIN or
+    # conversation is visible. Keep this exact allowlist, not all measurements.
+    for source_name, name in (("20261106-mochi-menu-real.png", "device-settings.png"),
+                              ("20261106-mochi-pin-real.png", "device-adult-pin.png")):
+        path = source_root / "docs/mediciones" / source_name
+        if path.is_file() and not linked(path):
+            destination = "docs/illustrations/" + name
+            entries[destination] = Entry(path, "reviewed-interface-capture", source_name, destination, path.read_bytes())
     prepared = []
     for entry in entries.values():
         data, adjustments = normalize_lf(entry.destination, entry.data)

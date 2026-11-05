@@ -1,6 +1,13 @@
 # Evidencia curada y límites
 
-Este export incluye únicamente previews sintéticas de geometría en
+`docs/illustrations/device-settings.png` y `device-adult-pin.png` son capturas
+reales de 0.16 instalado mediante OTA firmada, arranque validado `state=2`.
+Muestran únicamente interfaz sin cuentas, menores, conversaciones ni PIN.
+El teclado del adulto se comprobó visualmente numérico, negro y centrado.
+Se canceló el formulario sin introducir ni confirmar una clave; volumen,
+intentos y progreso de la lección conservaron sus valores previos.
+
+El export también incluye previews sintéticas de geometría en
 `docs/illustrations/`. Se generan ejecutando el C de las escenas con stubs de
 draw descriptors y un render host. No son capturas del firmware instalado.
 
@@ -45,8 +52,8 @@ grupos contra Postgres real con rollback. Dos turnos escritos con el modelo
 real devolvieron respuestas completas sin audio. El recorrido de acompañamiento
 por texto verificó oferta, confirmación, aviso mínimo familiar y exclusión del
 profesor; el aviso ficticio se eliminó y quedaron cero filas asociadas. La
-compilación ESP-IDF de 0.16 cabe en la partición de 4 MiB. Estas comprobaciones
-no acreditan instalación ni interacción táctil en una placa.
+compilación ESP-IDF de 0.16 cabe en la partición de 4 MiB. Estas pruebas de
+servicio y código por sí solas no acreditan interacción táctil.
 
 - Pruebas frontend y TypeScript mediante `npm test` y `npx tsc --noEmit` en `web/`.
 - Pruebas del conector con fixtures generadas en memoria o directorios temporales.
@@ -57,7 +64,7 @@ no acreditan instalación ni interacción táctil en una placa.
 
 No acredita una validación educativa con menores, eficacia de detección de acoso,
 sincronía acústica de un hardware distinto, fluidez física, calidad de micrófono,
-autonomía, instalación de una versión concreta ni una DB vacía reproducida.
+autonomía, instalación en otra placa ni una DB vacía reproducida.
 Las pruebas físicas y Postgres del operador usan alumnos ficticios y recursos
 privados; sus grabaciones, credenciales, respuestas y volcados no se exportan.
 

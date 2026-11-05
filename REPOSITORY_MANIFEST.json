@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "createdAt": "2026-11-05T23:49:14.230513+00:00",
+  "createdAt": "2026-11-05T23:53:48.490730+00:00",
   "scope": "Private personal/demo source export; mixed third-party licenses, not an all-MIT release",
   "files": [
     {
@@ -29,8 +29,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4183,
-      "sha256": "bab7787f732972d4deb71a75cd36d1c0d3928bd6371df8ccf4e0a04dfef1d5f0",
+      "bytes": 4263,
+      "sha256": "0dfb9a2a09faa2086bc822de1507df622894ee087609962dd37f74fb439069e3",
       "sourceRoot": "template",
       "sourceRelative": "README.md",
       "transforms": []
@@ -63,16 +63,16 @@
     },
     {
       "path": "docs/ESTADO_PRODUCTO.md",
-      "bytes": 6022,
-      "sha256": "4917e9a3fbf7e18c368e62f40d73c93d5761d8fe4dcf4442ad4c66af42f30304",
+      "bytes": 6152,
+      "sha256": "e4892f72e784d77f2d917eb5af1a841af48c6b53d2fdfcc0dc9c2105428941e4",
       "sourceRoot": "template",
       "sourceRelative": "STATUS.md",
       "transforms": []
     },
     {
       "path": "docs/EVIDENCIA.md",
-      "bytes": 3949,
-      "sha256": "62e30b400ce70dd80a06fb908b394b33b93fd5cad12cae14ba4b766166167acc",
+      "bytes": 4382,
+      "sha256": "a8f729582f1cf036ac4032aea1798a086a6de9a0c9bc15c68d285d4154d38ef5",
       "sourceRoot": "template",
       "sourceRelative": "EVIDENCE.md",
       "transforms": []
@@ -131,6 +131,22 @@
       "sha256": "4495864858adef55cb0ab0062b7b560051ee48ad9ef8b4051b2e945a5c236313",
       "sourceRoot": "synthetic-preview",
       "sourceRelative": "dense-12x4.png",
+      "transforms": []
+    },
+    {
+      "path": "docs/illustrations/device-adult-pin.png",
+      "bytes": 7753,
+      "sha256": "613ccaec0ede9fac996f66b6489f9d7112ec905e82c9e225aebe93c5229dddfb",
+      "sourceRoot": "reviewed-interface-capture",
+      "sourceRelative": "20261106-mochi-pin-real.png",
+      "transforms": []
+    },
+    {
+      "path": "docs/illustrations/device-settings.png",
+      "bytes": 8402,
+      "sha256": "2595b900ded0d8873a6a730a7228e1405995a9df4d66d5bfbb0eff49a705f932",
+      "sourceRoot": "reviewed-interface-capture",
+      "sourceRelative": "20261106-mochi-menu-real.png",
       "transforms": []
     },
     {
@@ -5091,8 +5107,8 @@
     },
     {
       "path": "tools/Prepare-MochiRepository.py",
-      "bytes": 26383,
-      "sha256": "17f7edf2eabed6c92144bcc8509bb67399f958a6c192304bb73066aa1d3e5c0f",
+      "bytes": 27000,
+      "sha256": "fa916634f7b9eaa913977fa2c8964ce57f33d2cfffa3d271a33fe1ac8eb58a56",
       "sourceRoot": "tools",
       "sourceRelative": "Prepare-MochiRepository.py",
       "transforms": []
@@ -5473,8 +5489,8 @@
     },
     {
       "path": "tools/repository-template/EVIDENCE.md",
-      "bytes": 3949,
-      "sha256": "62e30b400ce70dd80a06fb908b394b33b93fd5cad12cae14ba4b766166167acc",
+      "bytes": 4382,
+      "sha256": "a8f729582f1cf036ac4032aea1798a086a6de9a0c9bc15c68d285d4154d38ef5",
       "sourceRoot": "tools",
       "sourceRelative": "repository-template/EVIDENCE.md",
       "transforms": []
@@ -5513,8 +5529,8 @@
     },
     {
       "path": "tools/repository-template/README.md",
-      "bytes": 4183,
-      "sha256": "768be9257f24304385eb3a5b02f1f2863be106893fd3ce5b160a81ffdbad8253",
+      "bytes": 4263,
+      "sha256": "32c842c094e78c8a623fde93c84fcea6356282fe82de8afef141f22012eeb9ed",
       "sourceRoot": "tools",
       "sourceRelative": "repository-template/README.md",
       "transforms": []
@@ -5529,8 +5545,8 @@
     },
     {
       "path": "tools/repository-template/STATUS.md",
-      "bytes": 6022,
-      "sha256": "e7eac116332f93a4288f819b718f4d4fa700788fe10a30240f263dae4218ec85",
+      "bytes": 6152,
+      "sha256": "c7c32d422711eabe20549f478058edb0b22c4a93b25485ed1de3eb2d4b172175",
       "sourceRoot": "tools",
       "sourceRelative": "repository-template/STATUS.md",
       "transforms": []
@@ -8323,12 +8339,13 @@
     }
   ],
   "counts": {
-    "files": 975,
-    "bytes": 30755225,
+    "files": 977,
+    "bytes": 30773283,
     "bySourceRoot": {
       "root-source": 5,
       "template": 14,
       "synthetic-preview": 6,
+      "reviewed-interface-capture": 2,
       "firmware": 281,
       "gateway": 51,
       "hardware": 100,

@@ -36,7 +36,9 @@ prueba de servicio no sustituye el recorrido acústico ni valida su eficacia.
 
 El código 0.16 añade «Escribir» como opción adicional. Sus permisos, contexto
 efímero, horarios y avisos familiares se comparten con voz; no requiere ASR/TTS.
-Servicio y compilación verificados. Instalación y aceptación táctil pendientes.
+Servicio y compilación verificados. El operador instaló 0.16 por OTA firmada
+y validó el arranque (`state=2`) y la vista real del PIN. El envío escrito
+desde la pantalla táctil sigue pendiente de aceptación.
 Los ajustes adultos usan un desplegable; el PIN acepta sólo dígitos y muestra
 un teclado negro centrado, conservando la comprobación y el límite de intentos.
 
