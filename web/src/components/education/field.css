@@ -1,0 +1,414 @@
+.field-guide {
+  display: block;
+  position: relative;
+  width: min(100%, 190px);
+  flex-shrink: 0;
+  isolation: isolate;
+}
+.field-guide > img:first-child {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.08;
+  object-fit: contain;
+}
+.field-guide .field-guide-accessory {
+  position: absolute;
+  object-fit: contain;
+}
+.field-guide-accessory[data-accessory="scarf"] {
+  width: 52%;
+  top: 66%;
+  left: 27%;
+}
+.field-guide-accessory[data-accessory="star"] {
+  width: 24%;
+  top: 64%;
+  left: 65%;
+}
+.field-guide[data-mood="listen"] {
+  transform: rotate(-3deg);
+}
+.field-guide[data-mood="think"] {
+  transform: rotate(3deg);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .field-guide[data-mood="celebrate"] {
+    animation: field-celebrate 0.48s cubic-bezier(0.2, 0.75, 0.3, 1);
+  }
+  @keyframes field-celebrate {
+    50% {
+      transform: translateY(-10px) rotate(3deg);
+    }
+  }
+}
+.edu-access-cover,
+.expedition-start {
+  background-image: url("/educacion/mundos/reserva.webp");
+  background-position: 45% 57%;
+}
+.edu-access-cover .field-guide {
+  filter: drop-shadow(0 5px 0 #143b334d);
+}
+.expedition-buddy-stage > .field-guide {
+  width: 147px;
+  margin: 0.6rem 0 0.35rem;
+}
+.expedition-wardrobe-stage > .field-guide {
+  width: min(70%, 240px);
+}
+.expedition-start > .field-guide,
+.expedition-finish > .field-guide {
+  width: min(28%, 205px);
+}
+.curiosity-guide > .field-guide {
+  width: min(55%, 190px);
+  margin: auto;
+}
+.expedition-pin img {
+  width: 74%;
+  height: 82%;
+  object-fit: contain;
+}
+.world-library-art > img {
+  width: min(40%, 145px);
+  height: 132px;
+  object-fit: contain;
+  margin: 1.9rem 0 0.75rem;
+  filter: drop-shadow(0 4px 2px #103c3e60);
+}
+.world-library-entry[data-theme="reserve"] .world-library-art {
+  background-image: url("/educacion/mundos/reserva.webp");
+}
+.expedition-map[data-theme="space"],
+.world-library-entry[data-theme="space"] .world-library-art {
+  background: #1c3650 url("/educacion/mundos/observatorio.webp") center 62% / cover;
+}
+.expedition-map[data-theme="workshop"],
+.world-library-entry[data-theme="workshop"] .world-library-art {
+  background: #467e69 url("/educacion/mundos/taller.webp") center 62% / cover;
+}
+.field-stage {
+  height: clamp(388px, 57vh, 540px);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid #547467;
+  border-radius: 22px 22px 30px 30px;
+  background: #103c3e 20% center / cover no-repeat;
+}
+.field-canvas {
+  position: absolute;
+  inset: 0;
+}
+.field-canvas canvas {
+  display: block;
+}
+.field-hud {
+  position: absolute;
+  z-index: 1;
+  inset: 0.8rem 0.8rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+.field-stage .field-hud h2,
+.field-hud > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.46rem 0.66rem;
+  background: #f9f5df;
+  color: #103c3e;
+  border: 1px solid #4f6e62;
+  border-radius: 10px;
+  font-size: 0.93rem;
+  font-weight: 760;
+  line-height: 1.2;
+  margin: 0;
+}
+.field-hud svg {
+  flex-shrink: 0;
+}
+.field-hud > span {
+  white-space: nowrap;
+}
+.field-status {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 3.5rem;
+  color: #103c3e;
+  background: #f9f5df;
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+}
+.field-walk-controls {
+  position: absolute;
+  z-index: 1;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  gap: 0.45rem;
+}
+.field-walk-controls button {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #f9f5df;
+  border-radius: 50%;
+  background: #103c3e;
+  color: white;
+  cursor: pointer;
+}
+.field-walk-controls button:hover {
+  background: #27644f;
+}
+.field-walk-controls button:active {
+  transform: translateY(2px);
+}
+.field-scene:focus-visible {
+  outline: 3px solid #4a7d9a;
+  outline-offset: 4px;
+  border-radius: 22px;
+}
+.field-scene[data-entering="true"] .field-canvas {
+  pointer-events: none;
+}
+.field-nearby {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: calc(100% - 8.5rem);
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 1px solid #496b58;
+  border-radius: 100px 100px 100px 14px;
+  background: #fff8dc;
+  box-shadow: 0 3px 0 #223e3d38;
+  color: #19443e;
+  font-weight: 750;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+}
+.field-nearby svg {
+  flex-shrink: 0;
+}
+.field-nearby:hover {
+  background: #ffe9a0;
+  transform: translateY(-2px);
+}
+.field-observation {
+  position: absolute;
+  left: 1rem;
+  bottom: 4.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  max-width: min(90%, 25rem);
+  max-height: min(65%, 13rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid #59766c;
+  border-radius: 18px 18px 18px 4px;
+  background: #fffdf0f5;
+  box-shadow: 0 5px 22px #103c3e24;
+  color: #163e39;
+  font-size: 0.94rem;
+}
+.field-observation > svg {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.field-observation p {
+  margin: 0.25rem 0 0;
+  line-height: 1.45;
+}
+.field-observation button {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: #214b41;
+  background: #e8eee2;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.field-status.field-travelling {
+  bottom: 1rem;
+  left: 1rem;
+  margin: 0;
+}
+.field-help {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  color: #344e45;
+  font-size: 0.89rem;
+}
+.field-help svg {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+.field-stations {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scroll-snap-type: x proximity;
+  gap: 0.5rem;
+  padding: 0.25rem 0 0.75rem;
+  margin: 0 0 0.4rem;
+}
+.field-stations button {
+  flex: 0 0 min(14rem, 82%);
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 72px;
+  padding: 0.45rem 0.6rem;
+  color: #103c3e;
+  background: #fffdf2;
+  border: 1px solid #b8ccc2;
+  border-radius: 46px 46px 46px 14px;
+  text-align: left;
+  cursor: pointer;
+}
+.field-stations button:hover,
+.field-stations button[aria-pressed="true"] {
+  background: #f7efcf;
+  border-color: #547467;
+  transform: translateY(-2px);
+}
+.field-stations img {
+  display: block;
+  width: 45px;
+  height: 51px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.field-stations span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.field-stations strong {
+  display: block;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+.field-stations small {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #265e4b;
+  font-weight: 650;
+  margin-top: 0.22rem;
+}
+.edu-editor .field-stage {
+  height: 340px;
+}
+.edu-animal-art {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  object-fit: contain;
+}
+.edu-piece .edu-animal-art {
+  width: min(100%, 120px);
+  height: 78px;
+}
+.edu-observation .edu-animal-art,
+.expedition-done .edu-animal-art {
+  width: min(65%, 205px);
+  height: 145px;
+  margin: auto;
+}
+
+@media (max-width: 700px) {
+  .field-stage {
+    height: 410px;
+  }
+  .expedition-buddy-stage > .field-guide {
+    width: min(100%, 112px);
+  }
+  .expedition-wardrobe-stage > .field-guide {
+    width: 155px;
+  }
+  .curiosity-guide > .field-guide {
+    width: 106px;
+  }
+}
+@media (max-width: 460px) {
+  .field-stage {
+    height: 374px;
+    border-radius: 18px;
+  }
+  .field-hud {
+    inset: 0.6rem 0.55rem auto;
+  }
+  .field-stage .field-hud h2,
+  .field-hud > span {
+    font-size: 0.82rem;
+  }
+  .field-hud h2 svg {
+    display: none;
+  }
+  .field-walk-controls {
+    right: 0.55rem;
+    bottom: 0.55rem;
+  }
+  .field-nearby {
+    left: 0.55rem;
+    bottom: 0.65rem;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.82rem;
+  }
+  .field-observation {
+    left: 0.55rem;
+    bottom: 4.2rem;
+    padding: 0.75rem;
+    max-width: calc(100% - 1.1rem);
+    font-size: 0.88rem;
+  }
+  .field-stations button {
+    min-height: 57px;
+  }
+  .field-stations img {
+    height: 43px;
+  }
+  .expedition-start > .field-guide,
+  .expedition-finish > .field-guide {
+    width: 112px;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .field-stations button,
+  .field-nearby,
+  .field-walk-controls button {
+    transition:
+      transform 160ms ease-out,
+      background-color 160ms;
+  }
+  .field-observation {
+    animation: field-note-open 180ms ease-out;
+  }
+  @keyframes field-note-open {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

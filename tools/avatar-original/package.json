@@ -1,0 +1,9 @@
+{
+  "name": "mochi-oneworks-export",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "vite --host 127.0.0.1 --port 5194 --strictPort" },
+  "dependencies": { "react": "18.3.1", "react-dom": "18.3.1", "gifenc": "1.0.3" },
+  "devDependencies": { "vite": "5.4.21", "sass": "1.97.2" }
+}

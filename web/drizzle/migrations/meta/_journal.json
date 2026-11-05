@@ -1,0 +1,48 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793701179243,
+      "tag": "0000_peluqo_accounts_learning",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793701388172,
+      "tag": "0001_peluqo_study_devices",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793701493291,
+      "tag": "0002_tighten_account_helpers",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793701595104,
+      "tag": "0003_enforce_registration_age",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793704374775,
+      "tag": "0004_stripe_billing_shop",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793705226180,
+      "tag": "0005_confirmation_email_tracking",
+      "breakpoints": true
+    }
+  ]
+}

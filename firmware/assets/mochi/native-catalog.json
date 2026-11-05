@@ -1,0 +1,330 @@
+{
+  "schema": "mochi_native_catalog_v1",
+  "character": "Mochi",
+  "upstream": "https://github.com/louis-cfm/coucou",
+  "commit": "47d1c2da12bf1dce8fb28b825757d497c1e1d88d",
+  "animations": [
+    {
+      "id": "idle",
+      "label": "En calma",
+      "group": "state",
+      "duration_ms": 6000,
+      "loop": true
+    },
+    {
+      "id": "working",
+      "label": "Trabajando",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": true
+    },
+    {
+      "id": "thinking",
+      "label": "Pensando",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": true
+    },
+    {
+      "id": "searching",
+      "label": "Buscando",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": true
+    },
+    {
+      "id": "approval",
+      "label": "Pidiendo permiso",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": true
+    },
+    {
+      "id": "question",
+      "label": "Curiosidad",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": true
+    },
+    {
+      "id": "error",
+      "label": "Error",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": false
+    },
+    {
+      "id": "finished",
+      "label": "Celebración",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": false
+    },
+    {
+      "id": "ratelimit",
+      "label": "Necesito una pausa",
+      "group": "state",
+      "duration_ms": 4000,
+      "loop": true
+    },
+    {
+      "id": "sleeping",
+      "label": "Durmiendo",
+      "group": "state",
+      "duration_ms": 6000,
+      "loop": true
+    },
+    {
+      "id": "dizzy",
+      "label": "Mareo",
+      "group": "state",
+      "duration_ms": 3000,
+      "loop": false
+    },
+    {
+      "id": "love",
+      "label": "Cariño",
+      "group": "emote",
+      "duration_ms": 2800,
+      "loop": false
+    },
+    {
+      "id": "surprised",
+      "label": "Sorpresa",
+      "group": "emote",
+      "duration_ms": 2800,
+      "loop": false
+    },
+    {
+      "id": "proud",
+      "label": "Orgullo",
+      "group": "emote",
+      "duration_ms": 2800,
+      "loop": false
+    },
+    {
+      "id": "wink",
+      "label": "Guiño",
+      "group": "emote",
+      "duration_ms": 2800,
+      "loop": false
+    },
+    {
+      "id": "yawn",
+      "label": "Bostezo",
+      "group": "emote",
+      "duration_ms": 2800,
+      "loop": false
+    },
+    {
+      "id": "happy",
+      "label": "Alegría",
+      "group": "emote",
+      "duration_ms": 2800,
+      "loop": false
+    },
+    {
+      "id": "annoyed",
+      "label": "Enfado",
+      "group": "emote",
+      "duration_ms": 2800,
+      "loop": false
+    },
+    {
+      "id": "greet",
+      "label": "Saludo con la mano",
+      "group": "gesture",
+      "duration_ms": 2600,
+      "loop": false
+    },
+    {
+      "id": "blink",
+      "label": "Parpadeo",
+      "group": "gesture",
+      "duration_ms": 1000,
+      "loop": false
+    },
+    {
+      "id": "look",
+      "label": "Mirar alrededor",
+      "group": "gesture",
+      "duration_ms": 4800,
+      "loop": false
+    },
+    {
+      "id": "squash",
+      "label": "Rebote elástico",
+      "group": "gesture",
+      "duration_ms": 1500,
+      "loop": false
+    },
+    {
+      "id": "slap",
+      "label": "Golpecito y protesta",
+      "group": "gesture",
+      "duration_ms": 2200,
+      "loop": false
+    },
+    {
+      "id": "roll",
+      "label": "Vuelta completa",
+      "group": "gesture",
+      "duration_ms": 2200,
+      "loop": false
+    },
+    {
+      "id": "mailbox",
+      "label": "Transformación en buzón",
+      "group": "gesture",
+      "duration_ms": 4600,
+      "loop": false
+    },
+    {
+      "id": "gulp",
+      "label": "Buzón y masticación",
+      "group": "gesture",
+      "duration_ms": 3000,
+      "loop": false
+    },
+    {
+      "id": "dance",
+      "label": "Baile a 112 BPM",
+      "group": "gesture",
+      "duration_ms": 6400,
+      "loop": true
+    },
+    {
+      "id": "outfit_partyHat",
+      "label": "Gorro de fiesta",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_beanie",
+      "label": "Gorro de lana",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_crown",
+      "label": "Corona",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_sunglasses",
+      "label": "Gafas de sol",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_roundGlasses",
+      "label": "Gafas redondas",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_bow",
+      "label": "Lazo",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_scarf",
+      "label": "Bufanda",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_witchHat",
+      "label": "Sombrero de bruja",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_pumpkin",
+      "label": "Calabaza",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_santaHat",
+      "label": "Gorro navideño",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "outfit_bunnyEars",
+      "label": "Orejas de conejo",
+      "group": "outfit",
+      "duration_ms": 3600,
+      "loop": false
+    },
+    {
+      "id": "mini_love",
+      "label": "Mini: cariño",
+      "group": "mini",
+      "duration_ms": 6800,
+      "loop": true
+    },
+    {
+      "id": "mini_surprised",
+      "label": "Mini: sorpresa",
+      "group": "mini",
+      "duration_ms": 6800,
+      "loop": true
+    },
+    {
+      "id": "mini_proud",
+      "label": "Mini: orgullo",
+      "group": "mini",
+      "duration_ms": 6800,
+      "loop": true
+    },
+    {
+      "id": "mini_wink",
+      "label": "Mini: guiño",
+      "group": "mini",
+      "duration_ms": 6800,
+      "loop": true
+    },
+    {
+      "id": "mini_yawn",
+      "label": "Mini: bostezo",
+      "group": "mini",
+      "duration_ms": 6800,
+      "loop": true
+    },
+    {
+      "id": "mini_happy",
+      "label": "Mini: alegría",
+      "group": "mini",
+      "duration_ms": 6800,
+      "loop": true
+    },
+    {
+      "id": "mini_annoyed",
+      "label": "Mini: enfado",
+      "group": "mini",
+      "duration_ms": 6800,
+      "loop": true
+    },
+    {
+      "id": "update_hint",
+      "label": "Aviso de actualización",
+      "group": "gesture",
+      "duration_ms": 3000,
+      "loop": false
+    }
+  ]
+}

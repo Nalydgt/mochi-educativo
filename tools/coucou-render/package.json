@@ -1,0 +1,8 @@
+{
+  "name": "mochi-original-animation-renderer",
+  "private": true,
+  "dependencies": {
+    "@napi-rs/canvas": "1.0.13",
+    "esbuild": "0.28.2"
+  }
+}

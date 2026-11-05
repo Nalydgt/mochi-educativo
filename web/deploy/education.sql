@@ -1,0 +1,26 @@
+-- Private pilot schema. Never exposed through PostgREST. Only the web server connects.
+CREATE SCHEMA IF NOT EXISTS education;
+REVOKE ALL ON SCHEMA education FROM PUBLIC;
+CREATE TABLE IF NOT EXISTS education.teachers(id uuid PRIMARY KEY, created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.classes(id uuid PRIMARY KEY DEFAULT gen_random_uuid(), teacher_id uuid NOT NULL REFERENCES education.teachers(id), name text NOT NULL, draft jsonb, created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.learners(id uuid PRIMARY KEY DEFAULT gen_random_uuid(), class_id uuid NOT NULL REFERENCES education.classes(id), name text NOT NULL, companion jsonb NOT NULL DEFAULT '{"name":"Peluqo","color":"sunburst","accessory":"none"}', support boolean NOT NULL DEFAULT false, created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.access_codes(hash text PRIMARY KEY, learner_id uuid NOT NULL REFERENCES education.learners(id) ON DELETE CASCADE, expires_at timestamptz NOT NULL, consumed_at timestamptz);
+CREATE TABLE IF NOT EXISTS education.logins(hash text PRIMARY KEY, learner_id uuid NOT NULL REFERENCES education.learners(id) ON DELETE CASCADE, expires_at timestamptz NOT NULL, revoked boolean NOT NULL DEFAULT false);
+CREATE TABLE IF NOT EXISTS education.documents(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),class_id uuid NOT NULL REFERENCES education.classes(id), name text NOT NULL, mime text NOT NULL, bytes bytea NOT NULL, created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.chunks(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),document_id uuid NOT NULL REFERENCES education.documents(id) ON DELETE CASCADE,page integer, content text NOT NULL);
+CREATE TABLE IF NOT EXISTS education.versions(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),class_id uuid NOT NULL REFERENCES education.classes(id),mission jsonb NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.sessions(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),learner_id uuid NOT NULL REFERENCES education.learners(id) ON DELETE CASCADE,login_hash text NOT NULL REFERENCES education.logins(hash),version_id uuid NOT NULL REFERENCES education.versions(id),phase text NOT NULL DEFAULT 'diagnostic' CHECK(phase IN ('diagnostic','practice','final','completed','retention')), active_activity text,completed_at timestamptz,retention_completed_at timestamptz,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.attempts(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),session_id uuid NOT NULL REFERENCES education.sessions(id) ON DELETE CASCADE, request_id uuid NOT NULL,activity_id text NOT NULL,phase text NOT NULL,competency text NOT NULL,answer jsonb NOT NULL,correct boolean NOT NULL,hints integer NOT NULL DEFAULT 0,created_at timestamptz NOT NULL DEFAULT now(), UNIQUE(session_id,request_id));
+CREATE TABLE IF NOT EXISTS education.hints(id bigserial PRIMARY KEY,session_id uuid NOT NULL REFERENCES education.sessions(id) ON DELETE CASCADE,activity_id text NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.turns(id uuid PRIMARY KEY,session_id uuid NOT NULL REFERENCES education.sessions(id) ON DELETE CASCADE,question text NOT NULL,text text NOT NULL,emotion text NOT NULL,sources jsonb NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.devices(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),teacher_id uuid NOT NULL REFERENCES education.teachers(id),learner_id uuid REFERENCES education.learners(id) ON DELETE SET NULL,session_id uuid REFERENCES education.sessions(id) ON DELETE SET NULL,token_hash text UNIQUE NOT NULL,revoked boolean NOT NULL DEFAULT false,last_seen_at timestamptz,ack bigint NOT NULL DEFAULT 0,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.pairings(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),code_hash text UNIQUE NOT NULL,secret_hash text NOT NULL,device_id uuid REFERENCES education.devices(id),expires_at timestamptz NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.events(seq bigserial PRIMARY KEY,id uuid NOT NULL UNIQUE DEFAULT gen_random_uuid(), session_id uuid NOT NULL REFERENCES education.sessions(id) ON DELETE CASCADE,type text NOT NULL,payload jsonb NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE IF NOT EXISTS education.throttle(key text PRIMARY KEY,count integer NOT NULL DEFAULT 0,window_start timestamptz NOT NULL DEFAULT now());
+CREATE INDEX IF NOT EXISTS session_learner ON education.sessions(learner_id);
+CREATE INDEX IF NOT EXISTS attempt_session ON education.attempts(session_id,activity_id);
+CREATE INDEX IF NOT EXISTS event_session ON education.events(session_id,seq);
+DO $$ DECLARE t text; BEGIN FOR t IN SELECT tablename FROM pg_tables WHERE schemaname='education' LOOP EXECUTE format('ALTER TABLE education.%I ENABLE ROW LEVEL SECURITY',t); EXECUTE format('REVOKE ALL ON education.%I FROM PUBLIC',t); END LOOP; END $$;
+-- No client-role policies: teacher JWTs, learner cookies and device tokens are
+-- authenticated by server-only code, with ownership predicates on every operation.
+-- The database port is private; no browser/device can connect as its owner.

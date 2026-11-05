@@ -1,0 +1,17 @@
+{
+  "repository": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+  "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+  "file": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+  "size": 2497281120,
+  "sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+  "context_length": 65536,
+  "cache_type": "f16",
+  "cache_reuse": 128,
+  "cache_ram_mib": 512,
+  "cache_idle_slots": false,
+  "speculative": "ngram-simple",
+  "ngram_match": 4,
+  "ngram_draft": 8,
+  "memory_limit": "16g",
+  "image": "ghcr.io/ggml-org/llama.cpp@sha256:8badce92ec1860c764ca19c736422e81a12c65d76da57313651a7804bfe6ed40"
+}

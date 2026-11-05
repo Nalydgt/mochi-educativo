@@ -1,0 +1,147 @@
+{
+  "commit": "47d1c2da12bf1dce8fb28b825757d497c1e1d88d",
+  "author": "Louis Raillé",
+  "radius": 120,
+  "assets": [
+    {
+      "id": "body",
+      "kind": "body",
+      "outfit": "none",
+      "file": "body.png",
+      "x": -139,
+      "y": -108,
+      "width": 278,
+      "height": 216
+    },
+    {
+      "id": "pumpkin_body",
+      "kind": "body",
+      "outfit": "pumpkin",
+      "file": "pumpkin_body.png",
+      "x": -139,
+      "y": -108,
+      "width": 278,
+      "height": 216
+    },
+    {
+      "id": "partyHat_front",
+      "kind": "front",
+      "outfit": "partyHat",
+      "file": "partyHat_front.png",
+      "x": -42,
+      "y": -233,
+      "width": 128,
+      "height": 164
+    },
+    {
+      "id": "beanie_front",
+      "kind": "front",
+      "outfit": "beanie",
+      "file": "beanie_front.png",
+      "x": -146,
+      "y": -161,
+      "width": 292,
+      "height": 164
+    },
+    {
+      "id": "crown_back",
+      "kind": "back",
+      "outfit": "crown",
+      "file": "crown_back.png",
+      "x": -139,
+      "y": -132,
+      "width": 278,
+      "height": 83
+    },
+    {
+      "id": "crown_front",
+      "kind": "front",
+      "outfit": "crown",
+      "file": "crown_front.png",
+      "x": -141,
+      "y": -111,
+      "width": 282,
+      "height": 108
+    },
+    {
+      "id": "sunglasses_front",
+      "kind": "front",
+      "outfit": "sunglasses",
+      "file": "sunglasses_front.png",
+      "x": -139,
+      "y": -20,
+      "width": 278,
+      "height": 65
+    },
+    {
+      "id": "roundGlasses_front",
+      "kind": "front",
+      "outfit": "roundGlasses",
+      "file": "roundGlasses_front.png",
+      "x": -139,
+      "y": -27,
+      "width": 278,
+      "height": 79
+    },
+    {
+      "id": "bow_front",
+      "kind": "front",
+      "outfit": "bow",
+      "file": "bow_front.png",
+      "x": 14,
+      "y": -95,
+      "width": 70,
+      "height": 52
+    },
+    {
+      "id": "scarf_front",
+      "kind": "front",
+      "outfit": "scarf",
+      "file": "scarf_front.png",
+      "x": -143,
+      "y": 32,
+      "width": 286,
+      "height": 126
+    },
+    {
+      "id": "witchHat_front",
+      "kind": "front",
+      "outfit": "witchHat",
+      "file": "witchHat_front.png",
+      "x": -205,
+      "y": -212,
+      "width": 400,
+      "height": 193
+    },
+    {
+      "id": "pumpkin_front",
+      "kind": "front",
+      "outfit": "pumpkin",
+      "file": "pumpkin_front.png",
+      "x": -135,
+      "y": -139,
+      "width": 274,
+      "height": 247
+    },
+    {
+      "id": "santaHat_front",
+      "kind": "front",
+      "outfit": "santaHat",
+      "file": "santaHat_front.png",
+      "x": -154,
+      "y": -174,
+      "width": 316,
+      "height": 172
+    },
+    {
+      "id": "bunnyEars_back",
+      "kind": "back",
+      "outfit": "bunnyEars",
+      "file": "bunnyEars_back.png",
+      "x": -95,
+      "y": -162,
+      "width": 190,
+      "height": 108
+    }
+  ]
+}

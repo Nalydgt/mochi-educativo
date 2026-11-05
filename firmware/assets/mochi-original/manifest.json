@@ -1,0 +1,92 @@
+{
+  "format": "rgb565+a8",
+  "physicalCanvas": [
+    466,
+    466
+  ],
+  "sourceCanvas": [
+    512,
+    512
+  ],
+  "source": {
+    "repository": "https://github.com/oneworks-ai/avatar",
+    "commit": "a06ba84c123cf82e2b1a59c36b403392e22f9d08",
+    "version": "1.0.0-rc.9",
+    "preset": "bun",
+    "license": "MIT"
+  },
+  "assets": [
+    {
+      "id": "body_white",
+      "x": 64,
+      "y": 126,
+      "width": 337,
+      "height": 247,
+      "binary": "body_white.rgb565a8",
+      "bytes": 249717,
+      "sha256": "ca9919d1edaf85acc2cfd52539c933ef9f8cf405cad411d55f1c5635a505a06a",
+      "source": "body-white.png",
+      "sourceSha256": "1cd81482929e69186fa0ebee4d4cd6342af47ae6642752dcc8df7ccb96e7d7e4"
+    },
+    {
+      "id": "body_sky",
+      "x": 64,
+      "y": 126,
+      "width": 337,
+      "height": 247,
+      "binary": "body_sky.rgb565a8",
+      "bytes": 249717,
+      "sha256": "160d33b8bbdef6a969b72bd2d2e3ae6830a2e62e365a3420405c6fef0503de58",
+      "source": "body-sky.png",
+      "sourceSha256": "deabb69fc09970562e68af678d4760dc9009b91c9e9fd8760daf642caef9afa3"
+    },
+    {
+      "id": "body_lavender",
+      "x": 64,
+      "y": 126,
+      "width": 337,
+      "height": 247,
+      "binary": "body_lavender.rgb565a8",
+      "bytes": 249717,
+      "sha256": "094c2ddfec246c187bb7699fa9bd09ce81ffe0ade36da0e7be2f30d33818e6ed",
+      "source": "body-lavender.png",
+      "sourceSha256": "4074533d2d7059821e112488c5bdb75a510f731a7cf06ed12588f2f31dfc5848"
+    },
+    {
+      "id": "body_rose",
+      "x": 64,
+      "y": 126,
+      "width": 337,
+      "height": 247,
+      "binary": "body_rose.rgb565a8",
+      "bytes": 249717,
+      "sha256": "99b4c9a9dcc177dc82d3fcff06894154737dcbaf2ca55568293102c90b8edb35",
+      "source": "body-rose.png",
+      "sourceSha256": "481c94dd68efce7e14e1a45f10c66021f02db1b42b3e72c2b0bf4ebcab87bfaa"
+    },
+    {
+      "id": "body_mint",
+      "x": 64,
+      "y": 126,
+      "width": 337,
+      "height": 247,
+      "binary": "body_mint.rgb565a8",
+      "bytes": 249717,
+      "sha256": "4a85867cece39c98d9b559e6fa8ed7cddebf3cf5b2c9b58fba6608ee5c89139d",
+      "source": "body-mint.png",
+      "sourceSha256": "33f25b9e6b485acbec25283b7d1ae896468775fd3fa79ced0d6a9757b138a1ba"
+    },
+    {
+      "id": "body_honey",
+      "x": 64,
+      "y": 126,
+      "width": 337,
+      "height": 247,
+      "binary": "body_honey.rgb565a8",
+      "bytes": 249717,
+      "sha256": "a785f2744ec003bd7cd442229c71ac646b9c87a782bb6565de07abac02e37ae6",
+      "source": "body-honey.png",
+      "sourceSha256": "a854c5078c41bac086410d696a30486cfeae8f2923d3b27b1f2021a63d43d881"
+    }
+  ]
+}

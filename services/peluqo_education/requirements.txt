@@ -1,0 +1,7 @@
+fastapi==0.121.3
+uvicorn==0.38.0
+httpx==0.28.1
+faster-whisper==1.2.1
+numpy==2.3.4
+psycopg[binary]==3.2.13
+tzdata==2026.6

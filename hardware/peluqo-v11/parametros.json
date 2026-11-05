@@ -1,0 +1,233 @@
+{
+  "revision": "peluqo-v11-orejas-lisas",
+  "units": "mm",
+  "body": {
+    "width": 70.52,
+    "height": 70.52,
+    "depth": 13.7,
+    "wall": 2,
+    "split": 0,
+    "seam_gap": 0.2,
+    "rear_bottom": -35.93155908616386,
+    "alignment": "Original three case screw axes and three Z=0 stops"
+  },
+  "display": {
+    "glass_diameter": 48.96,
+    "pcb_diameter": 46.0,
+    "active_diameter": 44.16,
+    "window_diameter": 45.5,
+    "seat_diametral_clearance": 0.74,
+    "front_lip": 0.8,
+    "insert_depth_from_glass": 10.39999608,
+    "mounts_rear_view": [
+      [
+        0.0,
+        20.5
+      ],
+      [
+        -13.75,
+        -14.7
+      ],
+      [
+        13.75,
+        -14.7
+      ]
+    ],
+    "glass_front_z": 12.9,
+    "seat_diameter": 49.7,
+    "seat_cut_start_z": 10.0
+  },
+  "battery": {
+    "model": "EEMB LP562438 500 mAh",
+    "width": 24.5,
+    "height": 40,
+    "thickness": 5.9,
+    "bay": [
+      26.5,
+      42,
+      7.4
+    ],
+    "center_xy": [
+      1,
+      -2
+    ],
+    "floor_z": -17.7,
+    "connector": "User JST2.0 / PH2.0, board MX1.25; adapter bay reserved",
+    "bay_corner_radius": 2.0
+  },
+  "gps_antenna": {
+    "model": "Waveshare GNSS ceramic antenna complete assembly reference",
+    "dimensions": [
+      27,
+      27,
+      6.7
+    ],
+    "bay": [
+      28,
+      28,
+      7.6
+    ],
+    "center_xy": [
+      1,
+      1
+    ],
+    "bounds_z": [
+      -26.4,
+      -19.7
+    ],
+    "radiating_face": "rear -Z",
+    "cable_length_reference": 35,
+    "identity_confirmed_on_user_part": false
+  },
+  "speaker": {
+    "source": "Original HOUSING_3 recess measured 32x22x3.5; actual speaker not measured",
+    "bay": [
+      32.5,
+      22.5,
+      3.8
+    ],
+    "center_xy": [
+      1,
+      1
+    ],
+    "floor_z": -8.8,
+    "bay_corner_radius": 0.3
+  },
+  "case_screws": {
+    "centers": [
+      [
+        21.61293,
+        -7.86646
+      ],
+      [
+        -17.61902,
+        -14.78411
+      ],
+      [
+        -3.99391,
+        22.65058
+      ]
+    ],
+    "screw": "M2x8",
+    "head_seat_z": -4,
+    "tip_z": 4,
+    "retention": "Original printed pilot D1.8 retained; no magnetic charging parts"
+  },
+  "ears": {
+    "method": "Plain rounded triangular solids, symmetric and without holes",
+    "right_points_xy": [
+      [
+        12,
+        26
+      ],
+      [
+        25,
+        26
+      ],
+      [
+        22,
+        40
+      ]
+    ],
+    "z": [
+      4,
+      13.7
+    ],
+    "edge_rounding_mm": 1.6
+  },
+  "buttons": {
+    "stem_diameter": 2.5,
+    "bore_diameter": 3.2,
+    "collar_diameter": 4.4,
+    "contact_nose_diameter": 1.6,
+    "rest_gap": 0.25,
+    "outward_retention_stop": 4.8,
+    "tested_inward_travel": 0.45,
+    "hard_inward_stop": false,
+    "source": "Official STEP axes; inward travel is a verification sample, not a mechanical stop",
+    "contact_nose_width_height": [
+      1.6,
+      1.0
+    ],
+    "collar_start": 1.2
+  },
+  "internal_stack": {
+    "mount_centers": [
+      [
+        -18.5,
+        5
+      ],
+      [
+        20.5,
+        5
+      ]
+    ],
+    "spacer_height": 7.7,
+    "screws": "2 x M2x16 plus 0.5 mm washer",
+    "nut_pocket_z": [
+      -23.2,
+      -21.3
+    ],
+    "retaining_lip_z": [
+      -21.3,
+      -19.3
+    ],
+    "head_z": -8.3,
+    "tip_z": -24.3,
+    "washer": {
+      "outer_diameter": 5,
+      "inner_diameter": 2.2,
+      "thickness": 0.5
+    }
+  },
+  "source_scope": "Personal adaptation of user supplied EchoEar 3MF by ESP-Friends (BY-NC-SA): measured spherical exterior and original ear mesh, scaled uniformly1.1; latest compact Waveshare/EEMB500/GPS/two-button assembly.",
+  "exterior": {
+    "source_scale": 1.1,
+    "sphere_radius_source": 32,
+    "outer_radial_allowance": 0.06,
+    "front_plane": 13.7,
+    "seam_z": 0,
+    "flat_print_landing_diameter": 18
+  },
+  "joint": {
+    "male_outer_diameter": 67.2,
+    "male_inner_diameter": 64.8,
+    "male_bottom_z": -2.4,
+    "male_top_z": 1.6,
+    "female_outer_diameter": 67.8,
+    "female_bottom_z": -2.75,
+    "radial_clearance": 0.3,
+    "axial_clearance": 0.35,
+    "key_angle_degrees": 180,
+    "key_clearance": 0.3
+  },
+  "base": {
+    "normal_model": [
+      0,
+      0.9063077870366499,
+      0.42261826174069944
+    ],
+    "plane_offset": -32.9,
+    "floor_thickness": 2.4,
+    "face_angle_degrees": 65
+  },
+  "screen_cassette": {
+    "tube_outer_diameter": 53.4,
+    "pcb_throat_diameter": 50.2,
+    "glass_seat_diameter": 50.2,
+    "window_diameter": 45.5,
+    "flange_diameter": 61,
+    "case_aperture": 54,
+    "flange_recess_diameter": 61.6,
+    "mount_radius": 27.8,
+    "mount_angles": [
+      90,
+      210,
+      300
+    ],
+    "flange_bottom": 10.5,
+    "flange_top": 12.95,
+    "bezel_top": 13.7,
+    "mount_screw": "M2x20 countersunk90deg head<=4mm"
+  }
+}

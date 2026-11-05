@@ -1,0 +1,18 @@
+ALTER TABLE education.hints ADD COLUMN IF NOT EXISTS kind text NOT NULL DEFAULT 'hint' CHECK(kind IN ('hint','automatic','tutor'));
+ALTER TABLE education.turns ADD COLUMN IF NOT EXISTS activity_id text;
+ALTER TABLE education.turns ADD COLUMN IF NOT EXISTS phase text;
+CREATE INDEX IF NOT EXISTS classes_teacher ON education.classes(teacher_id);
+CREATE INDEX IF NOT EXISTS learners_class ON education.learners(class_id);
+CREATE INDEX IF NOT EXISTS code_learner ON education.access_codes(learner_id);
+CREATE INDEX IF NOT EXISTS login_learner ON education.logins(learner_id);
+CREATE INDEX IF NOT EXISTS document_class ON education.documents(class_id);
+CREATE INDEX IF NOT EXISTS chunk_document ON education.chunks(document_id);
+CREATE INDEX IF NOT EXISTS version_class ON education.versions(class_id);
+CREATE INDEX IF NOT EXISTS session_login ON education.sessions(login_hash);
+CREATE INDEX IF NOT EXISTS session_version ON education.sessions(version_id);
+CREATE INDEX IF NOT EXISTS hint_session ON education.hints(session_id,activity_id);
+CREATE INDEX IF NOT EXISTS turn_session ON education.turns(session_id);
+CREATE INDEX IF NOT EXISTS device_teacher ON education.devices(teacher_id);
+CREATE INDEX IF NOT EXISTS device_learner ON education.devices(learner_id);
+CREATE INDEX IF NOT EXISTS device_session ON education.devices(session_id);
+CREATE INDEX IF NOT EXISTS pairing_device ON education.pairings(device_id);

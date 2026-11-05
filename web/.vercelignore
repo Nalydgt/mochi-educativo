@@ -1,0 +1,10 @@
+.env*
+.runtime*
+.output
+.lovable
+.tanstack
+.wrangler
+node_modules
+output
+tools
+({src

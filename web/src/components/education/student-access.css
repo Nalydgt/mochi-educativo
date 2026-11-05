@@ -1,0 +1,231 @@
+.student-code-entry,
+.student-access-manager {
+  --access-ink: var(--peluqo-ink, var(--exp-ink, #143b33));
+  --access-green: var(--peluqo-green, var(--exp-green, #176249));
+  --access-soft: var(--peluqo-soft, var(--exp-soft, #e3f2e8));
+  --access-line: var(--peluqo-line, var(--exp-line, #c2d5c8));
+  color: var(--access-ink);
+}
+
+.student-code-profiles ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.9rem;
+}
+
+.student-code-profiles li {
+  position: relative;
+  max-width: 100%;
+}
+
+.student-code-profile {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 3rem;
+  border: 1px solid var(--access-line);
+  border-radius: 0.85rem;
+  padding: 0.35rem 2.7rem 0.35rem 0.45rem;
+  background: #fff;
+  font-weight: 700;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.student-code-profile .field-guide {
+  width: 2.2rem;
+}
+
+.student-code-profile:is(:hover, [aria-pressed="true"]) {
+  border-color: var(--access-green);
+  background: var(--access-soft);
+}
+
+.student-code-forget {
+  position: absolute;
+  inset: 0.125rem 0.125rem 0.125rem auto;
+  width: 2.75rem;
+  display: grid;
+  place-content: center;
+  border-radius: 0.7rem;
+  color: var(--access-ink);
+}
+
+.student-code-forget:hover {
+  background: var(--access-soft);
+}
+
+.edu-app .student-code-remember {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 2.75rem;
+  font-weight: 500;
+}
+
+.edu-app .student-code-input {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.student-access-manager {
+  width: 100%;
+  padding: 0.15rem 0.8rem;
+  border: 1px solid var(--access-line);
+  border-radius: 0.9rem;
+  background: #fff;
+  font-size: 0.875rem;
+}
+
+.student-access-manager summary {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  gap: 0.45rem;
+  list-style: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.student-access-manager summary::-webkit-details-marker {
+  display: none;
+}
+
+.student-access-manager summary::after {
+  content: "+";
+  margin-inline-start: auto;
+  font-size: 1.2rem;
+}
+
+.student-access-manager[open] summary::after {
+  content: "−";
+}
+
+.student-access-body {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid var(--access-line);
+}
+
+.student-access-body p {
+  margin: 0;
+}
+
+.student-access-status,
+.student-access-controls,
+.student-access-actions,
+.student-access-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.65rem;
+  min-width: 0;
+}
+
+.student-access-status span {
+  padding: 0.2rem 0.55rem;
+  border-radius: 99px;
+  background: #edf0ef;
+  font-weight: 700;
+}
+
+.student-access-status span[data-status="active"] {
+  background: var(--access-soft);
+}
+
+.student-access-status span[data-status="paused"] {
+  color: #624209;
+  background: #fff1cc;
+}
+
+.student-access-status span[data-status="revoked"],
+.student-access-error {
+  color: #8a2c28;
+  background: #fff0ed;
+}
+
+.student-access-controls {
+  align-items: end;
+}
+
+.student-access-controls label {
+  display: grid;
+  gap: 0.25rem;
+  max-width: 100%;
+  margin: 0;
+  font-weight: 650;
+}
+
+.student-access-controls :is(select, input),
+.student-access-body button {
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid var(--access-line);
+  border-radius: 0.55rem;
+  background: #fff;
+  color: var(--access-ink);
+}
+
+.student-access-body button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+}
+
+.student-access-body button:disabled {
+  opacity: 0.6;
+}
+
+.student-access-body button:hover:not(:disabled) {
+  border-color: var(--access-green);
+  background: var(--access-soft);
+}
+
+.student-access-body button.student-access-primary {
+  border-color: var(--access-ink);
+  color: white;
+  background: var(--access-ink);
+}
+
+.student-access-body button.student-access-primary:hover:not(:disabled) {
+  background: var(--access-green);
+}
+
+.student-access-result {
+  padding: 0.45rem 0.6rem;
+  border: 1px dashed var(--access-green);
+  border-radius: 0.6rem;
+  background: var(--access-soft);
+}
+
+.student-access-result code {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  user-select: all;
+}
+
+.student-access-error {
+  padding: 0.5rem;
+  border-radius: 0.55rem;
+}
+
+.student-access-message {
+  color: var(--access-green);
+  font-weight: 650;
+}
+
+.student-code-entry :focus-visible,
+.student-access-manager :focus-visible {
+  outline: 2px solid var(--access-green);
+  outline-offset: 2px;
+}

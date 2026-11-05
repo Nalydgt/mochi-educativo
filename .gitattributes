@@ -1,0 +1,18 @@
+* text=auto eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.png binary
+*.rgb565a8 binary
+*.ttf binary
+*.wav binary
+# Preserve upstream/generated formatting while checking owned source changes.
+firmware/components/** -whitespace
+firmware/main/mochi_latin_*.c -whitespace
+licenses/** -whitespace

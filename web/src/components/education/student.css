@@ -1,0 +1,1362 @@
+.is-expedition {
+  --exp-ink: #143b33;
+  --exp-text: #344e45;
+  --exp-line: #c2d5c8;
+  --exp-paper: #f4f8ef;
+  --exp-green: #176249;
+  --exp-soft: #e3f2e8;
+  --exp-sun: #ffd731;
+  --exp-art: url("/educacion/reserva-vertebrados.webp");
+  color: var(--exp-ink);
+  background: var(--exp-paper);
+}
+.edu-skip {
+  position: fixed;
+  inset: 1rem auto auto 1rem;
+  z-index: 2;
+  padding: 0.65rem 1rem;
+  color: white;
+  background: #143b33;
+  transform: translateY(-160%);
+}
+.edu-skip:focus {
+  transform: none;
+}
+.is-expedition .edu-header {
+  border-color: var(--exp-line);
+  padding-block: 0.65rem;
+}
+.is-expedition .edu-brand {
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.is-expedition .edu-brand span {
+  border-radius: 12px;
+}
+.is-expedition .edu-brand small,
+.edu-header-caption {
+  color: var(--exp-text);
+}
+.is-expedition .edu-header nav {
+  gap: 0.45rem;
+}
+.is-expedition .edu-header nav button {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+}
+.is-expedition .edu-header nav button:hover {
+  background: var(--exp-soft);
+}
+.is-expedition .edu-header nav button[aria-current] {
+  background: var(--exp-ink);
+  color: white;
+}
+.is-expedition .edu-main {
+  max-width: 1272px;
+  padding: 1.8rem 2rem 3rem;
+}
+.is-expedition .edu-footer {
+  border-color: var(--exp-line);
+  color: var(--exp-text);
+  background: var(--exp-soft);
+}
+.is-expedition input::placeholder,
+.is-expedition textarea::placeholder {
+  color: #53665e;
+  opacity: 1;
+}
+.is-expedition .edu-button {
+  gap: 0.55rem;
+  border-color: var(--exp-ink);
+  color: var(--exp-ink);
+}
+.is-expedition .edu-button:hover {
+  background: var(--exp-soft);
+}
+.is-expedition .edu-button.primary {
+  background: var(--exp-ink);
+  color: white;
+}
+.is-expedition .edu-button.primary:hover {
+  background: var(--exp-green);
+}
+.is-expedition .edu-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.is-expedition .edu-exit {
+  margin: 0;
+}
+
+.is-expedition .edu-access {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(270px, 1fr);
+  align-items: center;
+  gap: clamp(1.35rem, 4.5vw, 4rem);
+  padding: 1rem 0;
+}
+.edu-access-cover {
+  min-height: 530px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+  isolation: isolate;
+  padding: clamp(1.4rem, 4vw, 3rem);
+  border-radius: 16px;
+  overflow: hidden;
+  color: white;
+  background: #2b6c4b var(--exp-art) 44% center / cover;
+}
+.edu-access-cover::before,
+.expedition-start::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(128deg, #103b2ef5 0%, #103b2edb 27%, #103b2e0c 79%);
+}
+.edu-cover-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.7rem;
+  background: #f5f7df;
+  color: var(--exp-ink);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 750;
+}
+.is-expedition .edu-access-cover h1 {
+  font-size: 3.55rem;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+  max-width: 12ch;
+  margin: 1rem 0 0.7rem;
+  overflow-wrap: anywhere;
+}
+.edu-access-copy p {
+  max-width: 33ch;
+  color: #f2fff5;
+}
+.edu-access-cover .edu-welcome-mascot {
+  width: min(38%, 174px);
+  margin: 0 4% 0 0;
+  align-self: end;
+  filter: drop-shadow(0 5px 0 #143b3380);
+}
+.is-expedition .edu-login {
+  border-color: var(--exp-line);
+  padding: clamp(1.35rem, 3vw, 2.4rem);
+}
+.edu-entry-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+  background: var(--exp-sun);
+}
+.edu-login p,
+.edu-login .edu-help {
+  color: var(--exp-text);
+}
+.edu-login input[name="code"] {
+  min-height: 52px;
+}
+.edu-login .edu-button.primary {
+  width: 100%;
+  justify-content: space-between;
+}
+.is-expedition .edu-login .edu-text-button {
+  min-height: 44px;
+}
+
+.expedition-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.expedition-intro h1 {
+  font-size: 2.65rem;
+  max-width: 27ch;
+  overflow-wrap: anywhere;
+}
+.expedition-intro p {
+  margin-block: 0.45rem 0;
+  color: var(--exp-text);
+}
+.expedition-intro .expedition-greeting {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.35rem;
+  font-weight: 750;
+  color: var(--exp-green);
+}
+.expedition-connection {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  color: var(--exp-text);
+  border: 1px solid var(--exp-line);
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.expedition-connection[data-connected="true"] {
+  background: var(--exp-soft);
+}
+.expedition-route {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  padding: 0 0 0.85rem;
+  margin: 0 0 1rem;
+  border-bottom: 1px solid var(--exp-line);
+}
+.expedition-route li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: var(--exp-text);
+  line-height: 1.2;
+  font-size: 0.9rem;
+}
+.expedition-route li > span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--exp-line);
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: white;
+}
+.expedition-route li[data-past="true"] > span {
+  background: var(--exp-soft);
+}
+.expedition-route li[aria-current] {
+  color: var(--exp-ink);
+}
+.expedition-route li[aria-current] > span {
+  background: var(--exp-sun);
+  border-color: var(--exp-ink);
+}
+.expedition-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(235px, 275px);
+  gap: 1.4rem;
+  align-items: start;
+}
+.expedition-board {
+  min-width: 0;
+}
+
+.expedition-map {
+  position: relative;
+  isolation: isolate;
+  min-height: 445px;
+  border: 1px solid #608571;
+  border-radius: 16px;
+  background: #9ad7b3 var(--exp-art) center 57% / cover;
+}
+.expedition-map-heading {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 1rem;
+  pointer-events: none;
+}
+.expedition-map-heading > div {
+  padding: 0.6rem 0.9rem;
+  background: #f8faed;
+  border: 1px solid #275946;
+  border-radius: 12px;
+}
+.expedition-map-heading h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+.expedition-map-heading p {
+  margin: 0.15rem 0 0;
+  font-size: 0.92rem;
+}
+.expedition-compass {
+  box-sizing: content-box;
+  background: #f8faed;
+  padding: 0.35rem;
+  border: 1px solid var(--exp-ink);
+  border-radius: 50%;
+}
+.expedition-trail {
+  position: absolute;
+  inset: 17% 0 0;
+  width: 100%;
+  height: 76%;
+  pointer-events: none;
+}
+.expedition-trail path {
+  stroke: #fef7d9;
+  stroke-width: 5;
+  stroke-dasharray: 3 9;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 0 #174c3f);
+}
+.expedition-stations {
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+}
+.expedition-map[data-layout="atlas"] .expedition-stations li {
+  position: absolute;
+  left: 17%;
+  top: 64%;
+  width: min(29%, 184px);
+  transform: translate(-50%, -50%);
+}
+.expedition-map[data-layout="atlas"] .expedition-stations li:nth-child(2) {
+  left: 50%;
+  top: 43%;
+}
+.expedition-map[data-layout="atlas"] .expedition-stations li:nth-child(3) {
+  left: 83%;
+  top: 57%;
+}
+.expedition-stations button {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--exp-ink);
+  cursor: pointer;
+  border-radius: 16px;
+}
+.expedition-stations button:focus-visible {
+  outline-color: var(--exp-ink);
+  outline-offset: 5px;
+  background: #ffffff4d;
+}
+.expedition-pin {
+  position: relative;
+  width: 112px;
+  height: 95px;
+  display: grid;
+  place-items: center;
+  background: #f4db81;
+  border: 2px solid #173e32;
+  box-shadow: 0 3px 0 #173e32;
+  border-radius: 50%;
+  transition: transform 200ms cubic-bezier(0.2, 0.75, 0.3, 1);
+}
+.expedition-stations li[data-station="anatomy"] .expedition-pin {
+  background: #d5edf9;
+}
+.expedition-stations li[data-station="question"] .expedition-pin {
+  background: #e6d9f8;
+}
+.expedition-pin svg {
+  width: 85%;
+  max-height: 76px;
+}
+.expedition-stations button:hover .expedition-pin {
+  transform: translateY(-4px);
+}
+.expedition-stamp {
+  position: absolute;
+  top: -0.25rem;
+  left: -0.2rem;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  color: white;
+  background: var(--exp-ink);
+  border: 2px solid #fffaf1;
+  border-radius: 50%;
+  font-weight: 800;
+}
+.expedition-pin[data-done="true"] .expedition-stamp {
+  color: var(--exp-ink);
+  background: #b6f3bf;
+  border-color: var(--exp-ink);
+}
+.expedition-station-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.34rem 0.68rem;
+  border: 1px solid var(--exp-ink);
+  border-radius: 10px;
+  background: white;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.expedition-station-label small {
+  color: #265e4b;
+  margin-top: 0.15rem;
+  font-weight: 700;
+}
+.expedition-map-caption {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  color: white;
+  background: var(--exp-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.expedition-map[data-layout="grid"] .expedition-trail {
+  display: none;
+}
+.expedition-map[data-layout="grid"] .expedition-stations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+  gap: 1rem;
+  padding-bottom: 3rem;
+}
+.expedition-map-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem 1rem;
+}
+.expedition-map-footer p {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1rem;
+}
+.expedition-map-footer p svg {
+  color: var(--exp-green);
+}
+
+.expedition-buddy,
+.expedition-workbench {
+  border: 1px solid var(--exp-line);
+  border-radius: 16px;
+  background: white;
+}
+.expedition-buddy-stage {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  padding: 0.4rem 0.75rem 0.8rem;
+  background: #e7e1f8;
+  border-radius: 15px 15px 0 0;
+  isolation: isolate;
+  transition: background-color 0.2s ease-out;
+}
+.expedition-buddy-stage::before {
+  content: "";
+  position: absolute;
+  width: 138px;
+  height: 138px;
+  border: 1px solid #c4afdf;
+  border-radius: 50%;
+  left: calc(50% - 69px);
+  top: 0.85rem;
+  background: #f3eefb;
+  z-index: -1;
+}
+.expedition-buddy-stage[data-mood="celebrate"] {
+  background: #fbe9a8;
+}
+.expedition-buddy-stage[data-mood="think"] {
+  background: #dceeff;
+}
+.expedition-buddy-stage > svg {
+  width: 144px;
+}
+.expedition-buddy-name {
+  display: inline-block;
+  max-width: 100%;
+  padding: 0.15rem 0.65rem;
+  border-radius: 100px;
+  background: #fff;
+  border: 1px solid #bba8d2;
+  font-size: 0.9rem;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+.expedition-buddy-body {
+  padding: 1rem 1.15rem;
+}
+.expedition-buddy-body h2 {
+  font-size: 1.26rem;
+  margin: 0;
+}
+.expedition-buddy-body p {
+  color: var(--exp-text);
+  margin: 0.4rem 0 0.7rem;
+}
+.expedition-buddy-body .edu-button {
+  margin-right: 0;
+}
+.expedition-hint {
+  width: 100%;
+}
+.expedition-chat summary,
+.expedition-journal summary {
+  cursor: pointer;
+  min-height: 44px;
+  align-content: center;
+  font-weight: 700;
+}
+.expedition-chat summary svg,
+.expedition-journal summary svg {
+  display: inline;
+  vertical-align: -0.25em;
+  margin: 0 0.35rem 0 0.1rem;
+}
+.expedition-chat form {
+  margin-top: 0.5rem;
+}
+.expedition-chat textarea {
+  min-height: 5rem;
+}
+.expedition-help:not(:empty) {
+  padding: 0.7rem;
+  background: var(--exp-soft);
+  border-radius: 8px;
+  margin-top: 0.7rem;
+}
+.expedition-workbench {
+  padding: 1.25rem 1.6rem;
+}
+.expedition-workbench-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  color: var(--exp-green);
+  font-weight: 750;
+}
+.expedition-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 0.35rem;
+  cursor: pointer;
+  font-weight: 750;
+}
+.expedition-back:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+.expedition-count {
+  white-space: nowrap;
+  font-size: 0.86rem;
+  border-radius: 100px;
+  background: var(--exp-soft);
+  padding: 0.35rem 0.7rem;
+}
+.expedition-workbench .edu-game {
+  padding: 0.9rem 0 0.5rem;
+}
+.expedition-workbench .edu-game h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.95rem;
+}
+.expedition-workbench .edu-game .edu-tag {
+  color: var(--exp-green);
+}
+.expedition-workbench .edu-option {
+  border-color: var(--exp-line);
+}
+.expedition-workbench .edu-option.is-selected {
+  background: #eaf2fc;
+  border-color: #44678e;
+}
+.expedition-workbench .edu-option.is-selected[data-incorrect="true"] {
+  background: #fff1ea;
+  border-color: #ad4938;
+}
+.expedition-workbench .edu-option:hover {
+  border-color: var(--exp-green);
+}
+.expedition-workbench .edu-piece[aria-pressed="true"] {
+  background: #eaf2fc;
+  outline-color: #44678e;
+}
+.expedition-workbench .edu-anatomy {
+  background: #e0f2ef;
+}
+.expedition-workbench .edu-target {
+  background: #f3eafb;
+}
+.expedition-result:not(:empty) {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  color: var(--exp-ink);
+  background: var(--exp-soft);
+  border: 1px solid var(--exp-line);
+  border-radius: 10px;
+  font-weight: 650;
+}
+.expedition-done {
+  padding: 1rem 0;
+}
+.expedition-done[data-practice="true"] {
+  text-align: center;
+}
+.expedition-done > svg {
+  width: min(60%, 220px);
+  margin: 0.4rem auto;
+}
+.expedition-done h2 {
+  font-size: 1.7rem;
+}
+.expedition-done p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.expedition-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.expedition-actions .edu-button {
+  margin-right: 0;
+}
+.expedition-journal {
+  padding: 0.6rem 1.1rem;
+  margin: 1.15rem 0;
+  border: 1px solid var(--exp-line);
+  border-radius: 12px;
+  background: white;
+}
+.expedition-journal summary small {
+  padding: 0.15rem 0.48rem;
+  margin-left: 0.35rem;
+  border-radius: 100px;
+  background: var(--exp-soft);
+}
+
+.expedition-start,
+.expedition-finish {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  isolation: isolate;
+  padding: 2.2rem;
+  border-radius: 16px;
+  min-height: 260px;
+}
+.expedition-start {
+  background: #2b6c4b var(--exp-art) center 55% / cover;
+  color: white;
+  overflow: hidden;
+  justify-content: space-between;
+}
+.expedition-start h2,
+.expedition-finish h2 {
+  font-size: 2rem;
+  margin: 0;
+}
+.expedition-start .edu-button.primary {
+  background: var(--exp-sun);
+  color: var(--exp-ink);
+}
+.expedition-start .edu-button.primary:hover {
+  background: #ffeb91;
+}
+.expedition-start p {
+  max-width: 43ch;
+}
+.expedition-start > svg,
+.expedition-finish > svg {
+  width: min(28%, 190px);
+  flex-shrink: 0;
+}
+.expedition-finish {
+  border: 1px solid #d4c4ea;
+  background: #eee6fb;
+}
+.expedition-wardrobe {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+.expedition-wardrobe-stage {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  min-height: 415px;
+  padding: 1.4rem;
+  border: 1px solid var(--exp-line);
+  border-radius: 16px;
+  background: #ffe9a8;
+}
+.expedition-wardrobe-stage[data-color="mint"] {
+  background: #daf4e2;
+}
+.expedition-wardrobe-stage[data-color="lavender"] {
+  background: #eee4f9;
+}
+.expedition-wardrobe-stage[data-color="ember"] {
+  background: #ffe3d5;
+}
+.expedition-wardrobe-stage > svg {
+  width: min(70%, 225px);
+}
+.expedition-wardrobe-stage h1 {
+  font-size: 2.65rem;
+  overflow-wrap: anywhere;
+}
+.expedition-wardrobe-stage p {
+  margin: 0;
+}
+.expedition-wardrobe-label {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 750;
+}
+.expedition-wardrobe form {
+  padding: 0.4rem 0;
+}
+.expedition-wardrobe legend {
+  font-weight: 750;
+  margin-bottom: 0.35rem;
+}
+.expedition-swatches,
+.expedition-outfits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.expedition-swatches label,
+.expedition-outfits label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--exp-line);
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+}
+.expedition-swatches label[data-color="sunburst"] {
+  background: #ffe9a8;
+}
+.expedition-swatches label[data-color="mint"] {
+  background: #daf4e2;
+}
+.expedition-swatches label[data-color="lavender"] {
+  background: #eee4f9;
+}
+.expedition-swatches label[data-color="ember"] {
+  background: #ffe3d5;
+}
+.expedition-outfits label[data-locked="true"] {
+  background: #edf1ea;
+  color: var(--exp-text);
+  cursor: default;
+}
+.expedition-outfits span {
+  display: grid;
+  line-height: 1.25;
+}
+.expedition-outfits small {
+  margin-top: 0.12rem;
+}
+
+@media (max-width: 900px) {
+  .expedition-layout {
+    grid-template-columns: minmax(0, 1fr) 225px;
+    gap: 1rem;
+  }
+  .expedition-map {
+    min-height: 380px;
+  }
+  .expedition-pin {
+    width: 86px;
+    height: 74px;
+  }
+  .expedition-station-label {
+    font-size: 0.85rem;
+  }
+  .is-expedition .edu-access-cover h1 {
+    font-size: 2.7rem;
+  }
+  .is-expedition .edu-header nav {
+    order: initial;
+    width: auto;
+  }
+}
+@media (max-width: 700px) {
+  .is-expedition .edu-main {
+    padding: 1.25rem 1rem 2.5rem;
+  }
+  .is-expedition .edu-access,
+  .expedition-layout,
+  .expedition-wardrobe {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .edu-access-cover {
+    min-height: 300px;
+  }
+  .edu-access-cover .edu-welcome-mascot {
+    width: 96px;
+  }
+  .is-expedition .edu-login {
+    max-width: none;
+  }
+  .expedition-buddy {
+    display: grid;
+    grid-template-columns: minmax(130px, 0.65fr) minmax(0, 1.35fr);
+  }
+  .expedition-buddy-stage {
+    align-content: start;
+    padding-block: 0.7rem;
+    border-radius: 15px 0 0 15px;
+  }
+  .expedition-buddy-stage::before {
+    display: none;
+  }
+  .expedition-buddy-stage > svg {
+    width: min(100%, 122px);
+  }
+  .expedition-intro h1 {
+    font-size: 2rem;
+  }
+  .expedition-wardrobe-stage {
+    min-height: 275px;
+  }
+  .expedition-wardrobe-stage > svg {
+    width: 144px;
+  }
+  .expedition-workbench {
+    padding: 0.95rem 1.15rem;
+  }
+}
+@media (max-width: 460px) {
+  .is-expedition .edu-header nav {
+    order: 3;
+    width: 100%;
+  }
+  .edu-header-caption {
+    font-size: 0.8rem;
+  }
+  .edu-access-cover {
+    min-height: 280px;
+  }
+  .is-expedition .edu-access-cover h1 {
+    font-size: 2.3rem;
+  }
+  .expedition-route {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .expedition-map {
+    min-height: 330px;
+  }
+  .expedition-map[data-layout="atlas"] .expedition-stations li {
+    position: static;
+    transform: none;
+    width: auto;
+  }
+  .expedition-map[data-layout="atlas"] .expedition-stations {
+    display: grid;
+    gap: 0.55rem;
+    padding: 0.15rem 0.85rem 2.75rem;
+  }
+  .expedition-stations button {
+    flex-direction: row;
+    gap: 0.7rem;
+    text-align: left;
+  }
+  .expedition-pin {
+    flex: none;
+    width: 76px;
+    height: 59px;
+  }
+  .expedition-trail {
+    display: none;
+  }
+  .expedition-station-label {
+    align-items: flex-start;
+  }
+  .expedition-stamp {
+    width: 26px;
+    height: 26px;
+  }
+  .expedition-workbench .edu-game h2 {
+    font-size: 1.55rem;
+  }
+  .expedition-start,
+  .expedition-finish {
+    padding: 1.3rem;
+    flex-direction: column-reverse;
+    align-items: start;
+    gap: 0.5rem;
+  }
+  .expedition-start > svg,
+  .expedition-finish > svg {
+    width: 100px;
+  }
+  .expedition-buddy {
+    grid-template-columns: minmax(96px, 0.55fr) minmax(0, 1.45fr);
+  }
+  .expedition-buddy-body {
+    padding: 0.75rem;
+  }
+}
+.expedition-format {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--peluqo-line, #dde7dd);
+  background: var(--peluqo-paper, #f7faf5);
+}
+.expedition-format > p {
+  display: grid;
+  gap: 0.15rem;
+  margin: 0;
+  font-size: 0.92rem;
+}
+.expedition-format > p > span {
+  font-size: 0.78rem;
+  color: var(--peluqo-text, #3b5d51);
+}
+.expedition-format > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.expedition-format button {
+  display: grid;
+  align-content: center;
+  gap: 0.1rem;
+  min-height: 44px;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--peluqo-line, #dde7dd);
+  border-radius: 0.65rem;
+  background: var(--peluqo-panel, #fff);
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+.expedition-format button[aria-pressed="true"] {
+  background: #deefe5;
+  border-color: #28785d;
+}
+.expedition-format button small {
+  color: #234e3d;
+  font-size: 0.69rem;
+}
+.expedition-recommended {
+  margin-bottom: 0.9rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--peluqo-line, #dde7dd);
+  border-radius: 1rem;
+  background: var(--peluqo-panel, #fff);
+  color: var(--peluqo-ink, #173d30);
+}
+.edu-app .expedition-recommended h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.05rem;
+  margin: 0 0 0.3rem;
+}
+.edu-app .expedition-recommended p {
+  font-size: 0.86rem;
+  margin: 0.35rem 0;
+}
+.expedition-suggestions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: 0.5rem 0.8rem;
+}
+.expedition-suggestions > div {
+  display: grid;
+  align-content: space-between;
+  justify-items: start;
+}
+.expedition-physical {
+  display: grid;
+  gap: 0.4rem;
+  justify-items: end;
+  max-width: 21rem;
+}
+.expedition-device {
+  background: var(--peluqo-panel, #fff);
+  color: var(--peluqo-ink, #18362e);
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--peluqo-line, #d9e5dc);
+}
+.expedition-device summary {
+  font-weight: 750;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.expedition-device > p {
+  font-size: 0.82rem;
+}
+.expedition-device button {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+}
+.expedition-play-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin: -0.4rem 0 0.8rem;
+  color: var(--peluqo-green, #1d5c49);
+}
+.expedition-play-tools > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.83rem;
+  font-weight: 700;
+}
+.expedition-sound {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.45rem 0.7rem;
+  font-weight: 750;
+  font-size: 0.82rem;
+  border-radius: 2rem;
+  border: 1px solid var(--peluqo-line, #d9e5dc);
+  background: var(--peluqo-panel, #fff);
+}
+.expedition-sound[aria-pressed="true"] {
+  background: #e0f2e6;
+  border-color: #618f74;
+}
+.expedition-passport {
+  margin-bottom: 0.9rem;
+  background: var(--peluqo-panel, #fff);
+  border: 1px solid var(--peluqo-line, #d9e5dc);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.expedition-passport summary {
+  padding: 0.75rem 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--peluqo-green, #1d5c49);
+}
+.expedition-passport summary > svg {
+  display: inline;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+.expedition-passport summary > span {
+  display: inline;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+.expedition-passport > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  gap: 0.6rem;
+  padding: 0.4rem 0.85rem 1rem;
+}
+.expedition-passport button {
+  display: grid;
+  position: relative;
+  justify-items: center;
+  align-content: start;
+  gap: 0.3rem;
+  padding: 0.75rem 0.45rem;
+  border-radius: 0.85rem;
+  border: 1px dashed #9cab9c;
+  background: #f5f8f2;
+  min-width: 0;
+  color: #365341;
+}
+.expedition-passport button > .edu-animal-art {
+  width: 3.2rem;
+  height: 3.2rem;
+  object-fit: contain;
+  opacity: 0.75;
+}
+.expedition-passport button > strong {
+  font-size: 0.79rem;
+  text-align: center;
+}
+.expedition-passport button > span {
+  border-radius: 2rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.68rem;
+  background: #e5ebe2;
+  font-weight: 750;
+}
+.expedition-passport button > small {
+  position: absolute;
+  top: 0.3rem;
+  left: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+.expedition-passport button[data-discovered="true"] {
+  background: #fff7d8;
+  border: 1px solid #c4a43f;
+}
+.expedition-passport button[data-discovered="true"] > .edu-animal-art {
+  opacity: 1;
+}
+.expedition-passport button[data-discovered="true"] > span {
+  background: #f3de8a;
+  color: #574211;
+}
+.expedition-new-stamp {
+  position: fixed;
+  z-index: 60;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(30rem, calc(100vw - 2rem));
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1.1rem;
+  border: 1px solid #bf9b2c;
+  background: #fff8dd;
+  color: #4e3c0b;
+  box-shadow: 0 12px 40px #18362e24;
+}
+.expedition-stamp-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: #f6dc7e;
+}
+.expedition-new-stamp > div {
+  display: grid;
+  gap: 0.15rem;
+  flex: 1;
+}
+.expedition-new-stamp strong {
+  font-size: 0.98rem;
+}
+.expedition-new-stamp div > span {
+  font-size: 0.79rem;
+}
+.expedition-new-stamp button {
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  border-radius: 50%;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .student-expedition .edu-button,
+  .expedition-passport button,
+  .expedition-sound {
+    transition:
+      background-color 0.16s,
+      border-color 0.16s,
+      transform 0.16s,
+      box-shadow 0.16s;
+  }
+  .student-expedition .edu-button:active,
+  .expedition-passport button:active {
+    transform: translateY(2px) scale(0.98);
+  }
+  .expedition-workbench {
+    animation: expedition-arrive 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .expedition-new-stamp {
+    animation: expedition-stamp-arrive 0.4s cubic-bezier(0.18, 0.9, 0.22, 1.2) both;
+  }
+  .expedition-stamp-icon > svg {
+    animation: expedition-stamp-spark 0.7s 0.15s ease-out both;
+  }
+  .expedition-passport[open] > div {
+    animation: expedition-arrive 0.24s ease-out both;
+  }
+  .expedition-route li {
+    transition:
+      background-color 0.25s,
+      border-color 0.25s;
+  }
+  .expedition-buddy-stage .field-guide[data-mood="idle"] {
+    animation: expedition-breathe 4s ease-in-out infinite;
+  }
+  @keyframes expedition-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(9px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes expedition-stamp-arrive {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 20px) scale(0.92);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
+  }
+  @keyframes expedition-stamp-spark {
+    40% {
+      transform: rotate(24deg) scale(1.3);
+    }
+  }
+  @keyframes expedition-breathe {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-1deg);
+    }
+    50% {
+      transform: translateY(-4px) rotate(1deg);
+    }
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .expedition-passport button:hover {
+    transform: translateY(-3px);
+    border-style: solid;
+    box-shadow: 0 5px 12px #18362e12;
+  }
+  .student-expedition .edu-button:hover {
+    transform: translateY(-1px);
+  }
+}
+.expedition-route-panel {
+  margin: 0 0 0.7rem;
+  border-bottom: 1px solid var(--peluqo-line, #d9e5dc);
+}
+.expedition-route-panel > summary,
+.expedition-recommended > summary {
+  cursor: pointer;
+  font-weight: 750;
+  font-size: 0.85rem;
+  color: var(--peluqo-green, #1d5c49);
+  padding: 0.45rem 0;
+}
+.expedition-route-panel > summary > svg,
+.expedition-recommended > summary > svg {
+  display: inline;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+.expedition-route-panel > summary > span {
+  margin-left: 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 550;
+}
+.edu-app .student-expedition[data-exploring="true"] .expedition-intro {
+  margin-bottom: 0.6rem;
+  gap: 0.7rem;
+}
+.edu-app .student-expedition[data-exploring="true"] .expedition-intro h1 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  max-width: 36ch;
+}
+.edu-app .student-expedition[data-exploring="true"] .expedition-intro p {
+  margin: 0.3rem 0;
+  font-size: 0.85rem;
+}
+.edu-app .expedition-layout[data-map="true"] {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid #a9c3ac;
+  border-radius: 1.1rem;
+  position: static;
+  width: 100%;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy-stage {
+  min-height: 0;
+  height: 4.5rem;
+  width: 5rem;
+  flex: 0 0 5rem;
+  padding: 0;
+  background: none;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy-stage > .field-guide {
+  width: 4rem;
+  height: 4rem;
+  margin: 0;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy-name {
+  display: none;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy-body {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  padding: 0;
+  flex: 1;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy-body h2 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy-body p {
+  font-size: 0.85rem;
+  margin: 0;
+  flex: 1 1 22rem;
+}
+.edu-app .expedition-layout[data-map="true"] .expedition-buddy-body .edu-button {
+  width: auto;
+  margin: 0;
+  font-size: 0.8rem;
+  min-height: 42px;
+}
+.edu-app .student-expedition[data-exploring="true"] .expedition-board {
+  border-radius: 1.5rem;
+}
+.edu-app .student-expedition[data-exploring="true"] .field-scene {
+  border-radius: 1.4rem;
+}
+@media (max-width: 600px) {
+  .edu-app .expedition-layout[data-map="true"] .expedition-buddy-body h2 {
+    display: none;
+  }
+  .expedition-route-panel > summary > span {
+    display: inline-block;
+    margin-left: 0.35rem;
+  }
+}

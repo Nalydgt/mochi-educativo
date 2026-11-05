@@ -1,0 +1,151 @@
+{
+  "scene": {
+    "appearance": {
+      "backgroundStyle": "solid",
+      "bodyShape": "sphere",
+      "paletteId": "white"
+    },
+    "camera": {
+      "background": "transparent",
+      "frame": "square",
+      "frameShadow": {
+        "direction": 90,
+        "distance": 12,
+        "opacity": 22,
+        "softness": 24
+      },
+      "showFrameShadow": false,
+      "size": 512
+    },
+    "effects": {
+      "avatarShadow": {
+        "color": "#000000",
+        "direction": 45,
+        "distance": 12,
+        "opacity": 24,
+        "softness": 16
+      },
+      "colorGrade": {
+        "brightness": 1,
+        "saturation": 1,
+        "tintAmount": 0,
+        "tintB": 0,
+        "tintG": 0,
+        "tintR": 0
+      },
+      "faceShadow": {
+        "direction": 50,
+        "distance": 4,
+        "opacity": 28,
+        "softness": 0
+      },
+      "outline": {
+        "color": "#ffffff",
+        "opacity": 80,
+        "width": 4
+      },
+      "showAvatarShadow": false,
+      "showFaceShadow": false,
+      "showOutline": false
+    },
+    "decals": [],
+    "entity": {
+      "preset": "bun",
+      "parts": [
+        {
+          "baseColor": "#f7d4e4",
+          "foregroundColor": "#f7d4e4",
+          "highlightColor": "#ffffff",
+          "shadowColor": "#c8cddd",
+          "face": false,
+          "id": "bun-crown",
+          "label": "Rounded bun crown",
+          "occludedByFace": true,
+          "occlusionAmount": 11,
+          "occlusionPole": "bottom",
+          "roundness": 100,
+          "scaleX": 0.22,
+          "scaleY": 0.12,
+          "scaleZ": 0.45,
+          "shape": "sphere",
+          "topScale": 0.82,
+          "x": 0,
+          "y": -31,
+          "z": -14
+        },
+        {
+          "baseColor": "#f7d4e4",
+          "foregroundColor": "#f7d4e4",
+          "highlightColor": "#ffffff",
+          "shadowColor": "#c8cddd",
+          "face": true,
+          "id": "bun-body",
+          "label": "Flattened bun",
+          "roundness": 100,
+          "scaleX": 0.7,
+          "scaleY": 0.5,
+          "scaleZ": 0.7,
+          "shape": "sphere",
+          "topScale": 0.62,
+          "x": 0,
+          "y": 24,
+          "z": 0
+        }
+      ]
+    },
+    "face": {
+      "eyeHighlight": {
+        "color": "#ffffff",
+        "enabled": false,
+        "offsetX": -20,
+        "offsetY": -22,
+        "opacity": 100,
+        "size": 36
+      },
+      "eyeRoundness": 100,
+      "eyeShape": "ellipse",
+      "gap": 39,
+      "height": 1,
+      "leftEyeRotation": 0,
+      "mouthCurve": 38,
+      "mouthEnabled": false,
+      "mouthHeight": 5,
+      "mouthRotation": 0,
+      "mouthShape": "curve",
+      "mouthWidth": 29,
+      "mouthY": 49,
+      "noseEnabled": false,
+      "noseHeight": 8,
+      "noseRotation": 0,
+      "noseShape": "rounded",
+      "noseWidth": 12,
+      "noseY": 24,
+      "rotation": 0,
+      "rightEyeRotation": 0,
+      "width": 1
+    },
+    "interactionMode": "rotate",
+    "lighting": {
+      "azimuth": -48,
+      "distance": 78,
+      "elevation": 58,
+      "enabled": true,
+      "gridDensity": 400
+    },
+    "view": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "positionX": 0,
+      "positionY": -8,
+      "scale": 1.52
+    }
+  },
+  "schema": "oneworks.avatar",
+  "version": 1,
+  "metadata": {
+    "id": "mochi-bun-1",
+    "name": "MOCHI · Bun",
+    "createdAt": "2026-11-05T00:00:00Z"
+  }
+}

@@ -1,0 +1,25 @@
+# Optional private Tailscale node for this gateway:
+# docker compose -f compose.yaml -f tailscale.compose.yaml up -d
+# Authorize the node using the login URL in its logs.
+# Private TCP connections reach the gateway in the shared network namespace.
+services:
+  mochi:
+    ports: !reset []
+    network_mode: service:vpn
+    depends_on:
+      vpn:
+        condition: service_started
+  vpn:
+    image: ghcr.io/tailscale/tailscale:v1.102.2
+    entrypoint: ["/bin/sh", "/app/start-tailscale.sh"]
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8765:8765"
+    volumes:
+      - mochi-tailscale:/var/lib/tailscale
+      - .:/app:ro
+    cpus: 1
+    mem_limit: 256m
+
+volumes:
+  mochi-tailscale:

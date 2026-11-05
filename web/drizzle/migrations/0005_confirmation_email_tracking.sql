@@ -1,0 +1,2 @@
+ALTER TABLE public.shop_orders ADD COLUMN IF NOT EXISTS confirmation_code text UNIQUE, ADD COLUMN IF NOT EXISTS confirmation_email_sent_at timestamptz;
+ALTER TABLE public.billing_subscriptions ADD COLUMN IF NOT EXISTS confirmation_code text UNIQUE, ADD COLUMN IF NOT EXISTS confirmation_email_sent_at timestamptz;

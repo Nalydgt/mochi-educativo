@@ -1,0 +1,276 @@
+{
+  "revision": "gato-v5-camara-frontal",
+  "units": "mm",
+  "body": {
+    "width": 118.0,
+    "height": 118.0,
+    "depth": 60.0,
+    "radius": 16.0,
+    "wall": 2.4,
+    "split": 27.0,
+    "seam_gap": 0.3,
+    "shape": "continuous elliptic pillow head with integrated ear loft",
+    "center_y": 10.0,
+    "rear_extension": 18.0
+  },
+  "display": {
+    "glass_diameter": 48.96,
+    "pcb_diameter": 46.0,
+    "active_diameter": 44.16,
+    "window_diameter": 45.0,
+    "seat_diametral_clearance": 0.7,
+    "front_lip": 1.3,
+    "insert_depth_from_glass": 10.39999608,
+    "mounts_rear_view": [
+      [
+        0.0,
+        20.5
+      ],
+      [
+        -13.75,
+        -14.7
+      ],
+      [
+        13.75,
+        -14.7
+      ]
+    ]
+  },
+  "battery": {
+    "model": "955565",
+    "capacity_mah_label": 5000,
+    "nominal_voltage": 3.7,
+    "width": 65.0,
+    "height": 55.0,
+    "thickness": 9.5,
+    "clearance_xy_each_side": 1.0,
+    "clearance_above": 2.0,
+    "center_y": -5.0,
+    "floor_z": 12.0,
+    "connector_label": "PH-2.0",
+    "source": "Foto 1.jpg aportada por el usuario"
+    ,"tray_removable": true,
+    "tray_mount_centers": [[-37,-13],[38,0],[12,28]],
+    "tray_screws": "3 x M2x6 with captive M2 nuts"
+  },
+  "gps_antenna": {
+    "width": 25.0,
+    "length": 25.0,
+    "thickness": 4.0,
+    "center": [
+      0,
+      61.0,
+      26.5
+    ],
+    "dimensions_confirmed": false
+  },
+  "speaker": {
+    "diameter": 28.0,
+    "depth": 7.0,
+    "center": [
+      -39.5,
+      0.0,
+      23.2
+    ],
+    "dimensions_confirmed": false
+  },
+  "case_screws": {
+    "centers": [
+      [
+        -40,
+        -22
+      ],
+      [
+        -40,
+        22
+      ],
+      [
+        42,
+        -15
+      ],
+      [
+        42,
+        15
+      ]
+    ],
+    "clearance_diameter": 3.4,
+    "nut_across_flats": 5.8,
+    "nut_pocket_depth": 2.8,
+    "screw": "M3 x 45 mm",
+    "head_seat_z": -8.6,
+    "bearing_contact_z": 27.0,
+    "nut_pocket_z": [
+      29.0,
+      31.8
+    ],
+    "nut_retaining_shoulder": 2.0,
+    "nut_loading": "radial side slots opening inward, above continuous load-bearing lip",
+    "nut_bearing_plane_z": 29.0,
+    "screw_tip_z": 36.4
+  },
+  "ports": {
+    "usb_center": [
+      -44,
+      0.02,
+      50.63000196
+    ],
+    "usb_cutout_size": [
+      48,
+      14.4,
+      8.8
+    ],
+    "sd_center": [
+      44,
+      0.25,
+      53.62500196
+    ],
+    "sd_cutout_size": [
+      48,
+      19,
+      4.6
+    ],
+    "position_source": "Official STEP right-handed transform X,-Z,Y+55.93000196",
+    "positions_confirmed_on_physical_board": false
+  },
+  "status": "V5 front camera, screen and buttons +Z. Waveshare static CAD verified; new module bays are explicitly provisional design allowances, not measured replicas. Fit camera flex/optical axis, module height, switch suffix, antenna and speaker physically before final use.",
+  "ears": {
+    "construction": "Analytic continuous head loft; no separate ear geometry",
+    "radial_height_mm": 18.0,
+    "angle_degrees": [
+      57,
+      123
+    ],
+    "width_degrees": 8.5
+  },
+  "buttons": {
+    "stem_width": 3.6,
+    "bore_width": 4.2,
+    "head_diameter": 10.0,
+    "contact_nose_diameter": 1.6,
+    "rest_gap": 0.3,
+    "travel_stop": 0.5,
+    "guide_start": 4.8,
+    "retaining_screw_center": 2.9,
+    "retaining_screw": "M2x4 socket head D3.8 H2.0",
+    "stroke_source": "Design rest gap 0.30 mm and hard stop 0.50 mm give nominal depression 0.20 mm. Manufacturer TS24CA reference travel 0.20 +/-0.05 mm; actual board and printed fit must be checked.",
+    "guide_outer_diameter": 8.6,
+    "switch_manufacturer_reference": "https://www.sohantech.com/ts24ca-24mm-momentary-tact-switch-smd-push-button-switch-product/"
+  },
+  "carrier": {
+    "mount_centers": [
+      [
+        -24,
+        23
+      ],
+      [
+        -25.5,
+        -13.8
+      ],
+      [
+        16,
+        -24.8
+      ]
+    ],
+    "bottom_z": 46.30000392,
+    "top_z": 48.30000392,
+    "screw": "M2 x 6 mm",
+    "nut_across_flats": 4.2,
+    "nut_pocket_z": [
+      50.30000392,
+      52.20000392
+    ],
+    "nut_retaining_shoulder": 2.0,
+    "nut_loading": "radial side slots opening inward"
+  },
+  "camera": {
+    "model": "diymore ESP32-S3-CAM N16R8 OV2640 compact",
+    "direction": [
+      0,
+      0,
+      1
+    ],
+    "nominal_pcb_xy": [
+      40,
+      27
+    ],
+    "mechanical_drawing_available": false,
+    "center_xy": [
+      0,
+      44
+    ],
+    "pcb_rear_z": 47.4,
+    "design_bay_xyz": [
+      48,
+      29,
+      31
+    ],
+    "design_bay_z": [
+      27.4,
+      58.4
+    ],
+    "tray_slide_x_mm": [
+      -3,
+      3
+    ],
+    "optic_adapter_aperture": 20,
+    "optic_adapter_outer_xy": [
+      36,
+      28
+    ],
+    "sensor_alignment": "Adjustable tray and replaceable aperture; actual flex, optical axis and vignetting require physical fitting."
+  },
+  "boost": {
+    "model": "MT3608 module",
+    "nominal_reference_pcb_xy": [
+      36,
+      17
+    ],
+    "design_bay_xyz": [
+      38,
+      20,
+      17
+    ],
+    "center_xy": [
+      0,
+      -5
+    ],
+    "design_bay_z": [
+      -9,
+      8
+    ],
+    "wire_reserve_length_x": 48,
+    "actual_module_dimensions_confirmed": false
+  },
+  "switch": {
+    "model": "SS12D00",
+    "nominal_reference_body_xyz": [
+      8.5,
+      3.6,
+      3.5
+    ],
+    "pocket_xyz": [
+      9.5,
+      5,
+      4.5
+    ],
+    "center_xy": [
+      32,
+      -5
+    ],
+    "actuator_direction": [
+      0,
+      0,
+      -1
+    ],
+    "slider_direction": [
+      1,
+      0,
+      0
+    ],
+    "actuator_slot_xy": [
+      6.6,
+      3
+    ],
+    "actual_suffix_confirmed": false
+  }
+}

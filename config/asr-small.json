@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "repository": "Systran/faster-whisper-small",
+  "revision": "536b0662742c02347bc0e980a01041f333bce120",
+  "license": "MIT",
+  "source_url": "https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120",
+  "model_card_url": "https://huggingface.co/Systran/faster-whisper-small/blob/536b0662742c02347bc0e980a01041f333bce120/README.md",
+  "files": {
+    "config.json": {
+      "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+      "bytes": 2370
+    },
+    "model.bin": {
+      "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+      "bytes": 483546902
+    },
+    "tokenizer.json": {
+      "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+      "bytes": 2203239
+    },
+    "vocabulary.txt": {
+      "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913",
+      "bytes": 459861
+    },
+    "README.md": {
+      "sha256": "329373481008c7c38654aff8ecdcf0163c211557cc7ba8e2ef6f2f84b4f75ec8",
+      "bytes": 1998
+    }
+  },
+  "runtime": {
+    "device": "cpu",
+    "compute_type": "int8",
+    "cpu_threads": 4,
+    "encoder_frames": 1600,
+    "short_capture_max_seconds": 8,
+    "legacy_encoder_frames": 3000
+  }
+}

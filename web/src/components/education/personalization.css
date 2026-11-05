@@ -1,0 +1,302 @@
+.student-experience[data-study-theme="space"] {
+  --exp-ink: #302f54;
+  --exp-text: #514f70;
+  --exp-paper: #f4f2fb;
+  --exp-line: #d2cde7;
+  --exp-green: #514789;
+  --exp-soft: #ece6fa;
+  --exp-art: url("/educacion/mundos/observatorio.webp");
+}
+
+.student-experience[data-study-theme="workshop"] {
+  --exp-ink: #523220;
+  --exp-text: #654834;
+  --exp-paper: #fcf6ec;
+  --exp-line: #decbb7;
+  --exp-green: #8d4f26;
+  --exp-soft: #f8e7d0;
+  --exp-art: url("/educacion/mundos/taller.webp");
+}
+
+.student-experience[data-study-age="6–8"] :is(.edu-game, .study-profile-controls) {
+  font-size: 1.08rem;
+}
+
+.student-experience[data-study-age="6–8"] :is(.edu-button, .study-guide-choices label) {
+  min-height: 3.2rem;
+}
+
+.student-experience:is([data-study-age="13–15"], [data-study-age="16–18"]) .expedition-intro h1 {
+  font-size: clamp(1.9rem, 3.75vw, 3.05rem);
+  letter-spacing: -0.025em;
+}
+
+.student-experience[data-study-age="16–18"] :is(.expedition-route, .field-mode-picker) {
+  font-size: 0.9rem;
+}
+
+.study-personalization {
+  display: grid;
+  gap: 1.3rem;
+  margin-block-start: clamp(1.75rem, 4vw, 3rem);
+}
+
+.study-profile-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 13rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(4.5rem, 22%);
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1.1rem, 4vw, 2.5rem);
+  overflow: hidden;
+  border-radius: 1.05rem;
+  color: #fff;
+  background-color: #174934;
+  background-size: cover;
+  background-position: center 44%;
+}
+
+.study-profile-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, #102f28f5 2%, #143b33cd 56%, #143b3330);
+}
+
+.study-profile-hero[data-theme="space"]::before {
+  background: linear-gradient(105deg, #231d45f5 2%, #302e58dd 56%, #302e5840);
+}
+
+.study-profile-hero[data-theme="workshop"]::before {
+  background: linear-gradient(105deg, #412716f5 2%, #523220dc 56%, #52322038);
+}
+
+.study-profile-hero > div > span,
+.study-profile-layout h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 750;
+}
+
+.study-profile-hero h2 {
+  margin: 0.4rem 0 0.45rem;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  color: inherit;
+}
+
+.study-profile-hero p {
+  max-width: 43ch;
+  margin: 0;
+}
+
+.study-profile-hero .field-guide {
+  justify-self: center;
+  filter: drop-shadow(0 0.35rem 0.5rem #071d1752);
+}
+
+.study-profile-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.study-profile-controls,
+.study-profile-record > section {
+  display: grid;
+  gap: 0.8rem;
+  padding: clamp(1rem, 2.5vw, 1.6rem);
+  border: 1px solid var(--exp-line, #c2d5c8);
+  border-radius: 1rem;
+  background: white;
+}
+
+.study-profile-layout :is(h3, p, label) {
+  margin: 0;
+}
+
+.study-profile-layout h3 {
+  font-size: 1.13rem;
+}
+
+.study-profile-layout legend {
+  margin-block-end: 0.45rem;
+  font-weight: 700;
+}
+
+.study-profile-selects,
+.study-guide-choices {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.study-guide-choices {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.study-profile-selects {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.study-guide-choices label,
+.study-mechanics-choices label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  border: 1px solid var(--exp-line, #c2d5c8);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+.study-guide-choices label {
+  position: relative;
+  gap: 0.25rem;
+  padding: 0.65rem 0.45rem;
+  overflow-wrap: anywhere;
+  font-size: 0.875rem;
+}
+
+.study-guide-choices .field-guide {
+  width: min(100%, 5rem);
+}
+
+.study-guide-choices input {
+  position: absolute;
+  inset: 0.45rem 0.45rem auto auto;
+}
+
+.study-mechanics-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-block-start: 0.55rem;
+}
+
+.study-profile-layout .study-mechanics-choices label {
+  flex-direction: row;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.875rem;
+}
+
+.study-profile-layout label:has(input:checked) {
+  border-color: var(--exp-green, #176249);
+  background: var(--exp-soft, #e3f2e8);
+}
+
+.study-profile-layout label:has(input:disabled) {
+  color: var(--exp-text, #344e45);
+  background: var(--exp-paper, #f4f8ef);
+  cursor: default;
+}
+
+.study-profile-controls > .edu-button {
+  justify-self: start;
+}
+
+.study-profile-record {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.study-personal-goal progress {
+  width: 100%;
+  height: 0.7rem;
+  overflow: hidden;
+  border-radius: 999px;
+  color: var(--exp-green, #176249);
+  accent-color: var(--exp-green, #176249);
+}
+
+.study-personal-goal progress::-webkit-progress-bar {
+  background: var(--exp-soft, #e3f2e8);
+}
+
+.study-personal-goal progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: var(--exp-green, #176249);
+}
+
+.study-profile-record ul {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.study-profile-record li {
+  display: grid;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--exp-line, #c2d5c8);
+  border-radius: 0.7rem;
+}
+
+.study-profile-record li > span:first-of-type {
+  display: grid;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.study-personal-rewards li {
+  grid-template-columns: 2.6rem minmax(0, 1fr) auto;
+}
+
+.study-personal-rewards li[data-unlocked="true"],
+.study-history-phase[data-phase="completed"] {
+  background: var(--exp-soft, #e3f2e8);
+}
+
+.study-personal-rewards img {
+  width: 2.6rem;
+  height: 2.3rem;
+  object-fit: contain;
+}
+
+.study-personal-rewards [data-unlocked="false"] img {
+  filter: grayscale(1);
+}
+
+.study-personal-history li {
+  grid-template-columns: minmax(0, 1fr) minmax(0, max-content);
+}
+
+.study-history-phase {
+  max-width: 9rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.45rem;
+  background: var(--exp-paper, #f4f8ef);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.study-profile-record small,
+.study-profile-hint {
+  color: var(--exp-text, #344e45);
+  font-size: 0.86rem;
+}
+
+.study-profile-saved {
+  color: var(--exp-green, #176249);
+  font-weight: 700;
+}
+
+@media (max-width: 790px) {
+  .study-profile-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .study-profile-selects {
+    grid-template-columns: 1fr;
+  }
+}

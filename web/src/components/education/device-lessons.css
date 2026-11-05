@@ -1,0 +1,101 @@
+.device-lessons {
+  margin-block: 1.5rem;
+  padding: 1.7rem;
+  border: 1px solid var(--peluqo-line);
+  border-radius: var(--peluqo-radius);
+  background: var(--peluqo-panel);
+  color: var(--peluqo-ink);
+}
+.device-lessons h2 {
+  font-size: 1.5rem;
+  font-weight: 750;
+  margin-block: 0 1rem;
+}
+.device-lessons h3 {
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+.device-lessons p {
+  margin-block: 0.65rem 1rem;
+  max-width: 70ch;
+}
+.device-lessons-status {
+  border: 1px solid var(--peluqo-line);
+  border-radius: var(--peluqo-control-radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+.device-lessons summary {
+  cursor: pointer;
+  font-weight: 650;
+  padding-block: 0.65rem;
+}
+.device-lessons-create {
+  margin-block: 1rem 1.5rem;
+}
+.device-lessons-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1rem;
+}
+.device-lessons-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+.device-lessons-form input,
+.device-lessons-form select,
+.device-lessons-form textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--peluqo-line);
+  border-radius: var(--peluqo-control-radius);
+  background: var(--peluqo-panel);
+  color: var(--peluqo-ink);
+  font: inherit;
+}
+.device-lessons-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+.device-lessons-form small {
+  font-weight: 400;
+}
+.device-lessons-wide {
+  grid-column: 1/-1;
+}
+.device-lessons-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+.device-lessons-list > li {
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--peluqo-line);
+}
+.device-lessons-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.device-lessons-row h3 {
+  margin-top: 0;
+}
+.device-lessons-note {
+  color: var(--peluqo-text);
+  font-size: 0.9rem;
+}
+.device-lessons :focus-visible {
+  outline: 3px solid var(--peluqo-green);
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .device-lessons-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

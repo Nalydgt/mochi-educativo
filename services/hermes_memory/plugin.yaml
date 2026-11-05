@@ -1,0 +1,5 @@
+name: mochi-local
+version: 1.0.0
+description: Registro y memoria compartidos de Mochi en SQLite local.
+hooks:
+  - on_turn_start

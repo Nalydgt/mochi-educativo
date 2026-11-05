@@ -1,0 +1,11 @@
+{
+  "host": "nas.example.invalid",
+  "user": "operator",
+  "identity": "~/.ssh/mochi_operator_ed25519",
+  "gateway_remote": "/srv/mochi/gateway",
+  "model_remote": "/srv/mochi/local-model",
+  "profile_host": "/srv/mochi/profiles/mochi",
+  "device": "mochi",
+  "device_key_file": ".runtime/mochi-device.key",
+  "model_key_file": ".runtime/mochi-local-model.key"
+}

@@ -1,0 +1,9 @@
+services:
+  mochi:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./data:/data
+    ports:
+      - "127.0.0.1:8765:8765"

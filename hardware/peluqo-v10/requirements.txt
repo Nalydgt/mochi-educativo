@@ -1,0 +1,3 @@
+numpy
+scipy
+manifold3d==3.5.4
