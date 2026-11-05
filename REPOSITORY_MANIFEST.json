@@ -1,6 +1,6 @@
 {
   "format": 1,
-  "createdAt": "2026-11-05T23:18:27.036138+00:00",
+  "createdAt": "2026-11-05T23:49:14.230513+00:00",
   "scope": "Private personal/demo source export; mixed third-party licenses, not an all-MIT release",
   "files": [
     {
@@ -29,8 +29,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3866,
-      "sha256": "7bf5c04fabbdf26381e215a3284a65637481fd3a6f90c020c0430f9e2389f33e",
+      "bytes": 4183,
+      "sha256": "bab7787f732972d4deb71a75cd36d1c0d3928bd6371df8ccf4e0a04dfef1d5f0",
       "sourceRoot": "template",
       "sourceRelative": "README.md",
       "transforms": []
@@ -63,16 +63,16 @@
     },
     {
       "path": "docs/ESTADO_PRODUCTO.md",
-      "bytes": 5610,
-      "sha256": "85358a3ca0d3406869d07aac0ca16c15e48896741c75abe2fee9be9532a1413b",
+      "bytes": 6022,
+      "sha256": "4917e9a3fbf7e18c368e62f40d73c93d5761d8fe4dcf4442ad4c66af42f30304",
       "sourceRoot": "template",
       "sourceRelative": "STATUS.md",
       "transforms": []
     },
     {
       "path": "docs/EVIDENCIA.md",
-      "bytes": 3407,
-      "sha256": "cd3527704b3d3ac3303cf7e8be355db1442ce3485c4e08e33a23bae6b3ab739f",
+      "bytes": 3949,
+      "sha256": "62e30b400ce70dd80a06fb908b394b33b93fd5cad12cae14ba4b766166167acc",
       "sourceRoot": "template",
       "sourceRelative": "EVIDENCE.md",
       "transforms": []
@@ -95,8 +95,8 @@
     },
     {
       "path": "docs/MIGRATIONS.md",
-      "bytes": 2479,
-      "sha256": "02609f46dc16d6142caaa7e1d508d62757cb372552b362b079fb7c1e5d05ac53",
+      "bytes": 2644,
+      "sha256": "9290a38dc8593958d60e0a538022b662dad7caf7abb2399862f65562e6a8f3a9",
       "sourceRoot": "template",
       "sourceRelative": "MIGRATIONS.md",
       "transforms": []
@@ -160,7 +160,7 @@
     {
       "path": "firmware/CMakeLists.txt",
       "bytes": 216,
-      "sha256": "05650f01ceabf51adb477b2c57dfde6987990d375a08a4fe9469de05453989b9",
+      "sha256": "1cd9b2a745d27761b7c0e5b74b5618848bf954c746330205ad30346ff3e348e7",
       "sourceRoot": "firmware",
       "sourceRelative": "CMakeLists.txt",
       "transforms": []
@@ -2221,8 +2221,8 @@
     },
     {
       "path": "firmware/main/CMakeLists.txt",
-      "bytes": 1385,
-      "sha256": "9dba4d29fc380ea324d9d46a14f399816a1e6027e35dc647d38bb533bcefba35",
+      "bytes": 1410,
+      "sha256": "04fd9061d719fd027bd6b16e297fd695e371367fae08d6dd3002db4514bec8c1",
       "sourceRoot": "firmware",
       "sourceRelative": "main/CMakeLists.txt",
       "transforms": []
@@ -2367,8 +2367,8 @@
     },
     {
       "path": "firmware/main/mochi_education.c",
-      "bytes": 38674,
-      "sha256": "fb445e30da6208371e01db175d3d2d2c1a425cb91f311bfd3cf705f2b622fc02",
+      "bytes": 43386,
+      "sha256": "569d1b7fc6a5801b1267609e478f58adb3c8aeb9d0b690561312b91e15afd854",
       "sourceRoot": "firmware",
       "sourceRelative": "main/mochi_education.c",
       "transforms": []
@@ -2395,6 +2395,22 @@
       "sha256": "caa1543614bbefb61420a8229d56b7f3b7c33b27de3fd15ae0aa028e123bf33a",
       "sourceRoot": "firmware",
       "sourceRelative": "main/mochi_education_policy.h",
+      "transforms": []
+    },
+    {
+      "path": "firmware/main/mochi_education_text.c",
+      "bytes": 12942,
+      "sha256": "3486e6db0fdaeceaae57b974a4dd33010c71d74a56811897b269471705f52f02",
+      "sourceRoot": "firmware",
+      "sourceRelative": "main/mochi_education_text.c",
+      "transforms": []
+    },
+    {
+      "path": "firmware/main/mochi_education_text.h",
+      "bytes": 266,
+      "sha256": "6c68427996db94539ca740d8a7c2eebcc7e8b34af048ee38f1dcb4220f373952",
+      "sourceRoot": "firmware",
+      "sourceRelative": "main/mochi_education_text.h",
       "transforms": []
     },
     {
@@ -2599,16 +2615,16 @@
     },
     {
       "path": "firmware/main/mochi_runtime.c",
-      "bytes": 104687,
-      "sha256": "a9dc086dc06449d6d9e539eefd40ddc0841cc2f2e9a75165f1b5b7ff07fd521f",
+      "bytes": 105752,
+      "sha256": "7ccaa414eed58b30ffd8f25c4b013e55b5ccb4881c8bc74f92186a4381d265dc",
       "sourceRoot": "firmware",
       "sourceRelative": "main/mochi_runtime.c",
       "transforms": []
     },
     {
       "path": "firmware/main/mochi_runtime.h",
-      "bytes": 2416,
-      "sha256": "214bab445b59ebf20c829bb4fd4b05199e5c7bf6d3c68ba2c35de2323b4ed0fd",
+      "bytes": 2688,
+      "sha256": "396c41273b4c816dca5984432a17074ef9ce8a221ccc55191d0ef95527cb605c",
       "sourceRoot": "firmware",
       "sourceRelative": "main/mochi_runtime.h",
       "transforms": []
@@ -4325,8 +4341,8 @@
     },
     {
       "path": "services/peluqo_education/app.py",
-      "bytes": 30890,
-      "sha256": "d0cb00289a7a49e3f8654ee2dacc8dc9abd76fa0e7546d7efee859fbb7418f26",
+      "bytes": 34934,
+      "sha256": "90e3851461fd3b3ede43ce7f70315e821b37c9d451c01c95627aa55995c76925",
       "sourceRoot": "services",
       "sourceRelative": "peluqo_education/app.py",
       "transforms": []
@@ -4436,6 +4452,14 @@
       "transforms": []
     },
     {
+      "path": "services/peluqo_education/test_text_conversation.py",
+      "bytes": 5353,
+      "sha256": "2fa6856b9ecfba72e3b2124356f56f68cb8643626280015a8b0952f14ef2d5ae",
+      "sourceRoot": "services",
+      "sourceRelative": "peluqo_education/test_text_conversation.py",
+      "transforms": []
+    },
+    {
       "path": "services/peluqo_education/test_turn_guard.py",
       "bytes": 1822,
       "sha256": "d19ae32b80b37dd8eaf81a6851b0a7c7d85b7a3138ed2f16e3b93685f36427dc",
@@ -4453,8 +4477,8 @@
     },
     {
       "path": "services/peluqo_education/voice_policy.py",
-      "bytes": 2247,
-      "sha256": "56085946d997d4c46fdb69090f0edbb92ed05701e454f54c6fb2931fcb9c1714",
+      "bytes": 2623,
+      "sha256": "a95dbfefd50111a3f3ba879f367fdbc5b768976e4bfb7959a28b8984ffbc2be5",
       "sourceRoot": "services",
       "sourceRelative": "peluqo_education/voice_policy.py",
       "transforms": []
@@ -4787,8 +4811,8 @@
     },
     {
       "path": "tools/Check-MochiFamilySupport.py",
-      "bytes": 5753,
-      "sha256": "240aaf6fa583bd5df3e7046f5cfba2a94abfb95726277d20b440ab51eaf4050b",
+      "bytes": 6755,
+      "sha256": "84c8fc06cc2e83c6e18e1f4ecc94b82ed3fc288ff04072e39e2a7204894d5f4c",
       "sourceRoot": "tools",
       "sourceRelative": "Check-MochiFamilySupport.py",
       "transforms": []
@@ -4875,6 +4899,14 @@
       "sha256": "38911f60e2d9a374a48a3b4bfb7ddcd44a26077d9335c5a9063309d380514130",
       "sourceRoot": "tools",
       "sourceRelative": "Check-MochiStream.py",
+      "transforms": []
+    },
+    {
+      "path": "tools/Check-MochiTextConversation.py",
+      "bytes": 1874,
+      "sha256": "7fe4a5cb38f14907a63e0404ca0cc5e8206fb912277c9bff1f33b2abdeaad8ef",
+      "sourceRoot": "tools",
+      "sourceRelative": "Check-MochiTextConversation.py",
       "transforms": []
     },
     {
@@ -5332,6 +5364,22 @@
       "transforms": []
     },
     {
+      "path": "tools/preview-adult-pin.py",
+      "bytes": 2287,
+      "sha256": "809f236733c0fb807c5b6bcbe14c27e624498780e7934a2062240027d70ca228",
+      "sourceRoot": "tools",
+      "sourceRelative": "preview-adult-pin.py",
+      "transforms": []
+    },
+    {
+      "path": "tools/preview-education-text.py",
+      "bytes": 3138,
+      "sha256": "c6a86ab531da94a24bb0517855da02f1316f5987b9bcb0395f9057584b5127a0",
+      "sourceRoot": "tools",
+      "sourceRelative": "preview-education-text.py",
+      "transforms": []
+    },
+    {
       "path": "tools/preview-lesson-scene/README.md",
       "bytes": 1784,
       "sha256": "00f9a3c062a784831dec1428e78d16226caaceb05b8082149325601afa82b33d",
@@ -5425,8 +5473,8 @@
     },
     {
       "path": "tools/repository-template/EVIDENCE.md",
-      "bytes": 3407,
-      "sha256": "cd3527704b3d3ac3303cf7e8be355db1442ce3485c4e08e33a23bae6b3ab739f",
+      "bytes": 3949,
+      "sha256": "62e30b400ce70dd80a06fb908b394b33b93fd5cad12cae14ba4b766166167acc",
       "sourceRoot": "tools",
       "sourceRelative": "repository-template/EVIDENCE.md",
       "transforms": []
@@ -5449,8 +5497,8 @@
     },
     {
       "path": "tools/repository-template/MIGRATIONS.md",
-      "bytes": 2479,
-      "sha256": "02609f46dc16d6142caaa7e1d508d62757cb372552b362b079fb7c1e5d05ac53",
+      "bytes": 2644,
+      "sha256": "9290a38dc8593958d60e0a538022b662dad7caf7abb2399862f65562e6a8f3a9",
       "sourceRoot": "tools",
       "sourceRelative": "repository-template/MIGRATIONS.md",
       "transforms": []
@@ -5465,8 +5513,8 @@
     },
     {
       "path": "tools/repository-template/README.md",
-      "bytes": 3866,
-      "sha256": "9be797078ef5e41b7d23ded07eaf30c54c03c40863de20e74c87a913138b6ed6",
+      "bytes": 4183,
+      "sha256": "768be9257f24304385eb3a5b02f1f2863be106893fd3ce5b160a81ffdbad8253",
       "sourceRoot": "tools",
       "sourceRelative": "repository-template/README.md",
       "transforms": []
@@ -5481,8 +5529,8 @@
     },
     {
       "path": "tools/repository-template/STATUS.md",
-      "bytes": 5610,
-      "sha256": "9b265256e663ce23e805bf290f98c81830ea6fea3e4b4768b2a46dfac14556c5",
+      "bytes": 6022,
+      "sha256": "e7eac116332f93a4288f819b718f4d4fa700788fe10a30240f263dae4218ec85",
       "sourceRoot": "tools",
       "sourceRelative": "repository-template/STATUS.md",
       "transforms": []
@@ -7291,8 +7339,8 @@
     },
     {
       "path": "web/src/lib/education/school-schema.ts",
-      "bytes": 10966,
-      "sha256": "b2d0b2e5b24ce6700b1cf502fa7249f73f6d67627f489d85f5017845e755f224",
+      "bytes": 10995,
+      "sha256": "ac98579be52aa3c977c4da82782cef59e72756908f35d27b93350418b998b3e7",
       "sourceRoot": "web",
       "sourceRelative": "src/lib/education/school-schema.ts",
       "transforms": []
@@ -7851,8 +7899,8 @@
     },
     {
       "path": "web/src/test/education-school.test.ts",
-      "bytes": 11076,
-      "sha256": "bb7866b3bfe77e839b03b8b1b0fc23c320bfaf5aa89e5b49e80b47f962f072da",
+      "bytes": 11275,
+      "sha256": "444025c37210453ae633d412296d2c0f978928892c038c1224ee9109d4756f77",
       "sourceRoot": "web",
       "sourceRelative": "src/test/education-school.test.ts",
       "transforms": []
@@ -7960,6 +8008,16 @@
       "sourceRoot": "web",
       "sourceRelative": "supabase/migrations/20261105195455_legacy_notebook_documents.sql",
       "transforms": []
+    },
+    {
+      "path": "web/supabase/migrations/20261105232924_mochi_text_conversation.sql",
+      "bytes": 3093,
+      "sha256": "a6c7413013478157192b6ddbd5092c22c7e1d967feeccd6951314387cac33578",
+      "sourceRoot": "web",
+      "sourceRelative": "supabase/migrations/20261105232924_mochi_text_conversation.sql",
+      "transforms": [
+        "normalize_lf"
+      ]
     },
     {
       "path": "web/tools/Abrir-PELUQO.ps1",
@@ -8153,8 +8211,8 @@
     },
     {
       "path": "web/tools/verify-care-collaboration.mjs",
-      "bytes": 19093,
-      "sha256": "d4679b2ba2706becafe53e342529a30d1fe4e1aba8b63a1b0ed581b2f9dfd157",
+      "bytes": 20014,
+      "sha256": "78202ebbf035eefceac02b597d0debdb973303742c57b28f4840960e3c0799b9",
       "sourceRoot": "web",
       "sourceRelative": "tools/verify-care-collaboration.mjs",
       "transforms": []
@@ -8265,19 +8323,19 @@
     }
   ],
   "counts": {
-    "files": 968,
-    "bytes": 30710755,
+    "files": 975,
+    "bytes": 30755225,
     "bySourceRoot": {
       "root-source": 5,
       "template": 14,
       "synthetic-preview": 6,
-      "firmware": 279,
+      "firmware": 281,
       "gateway": 51,
       "hardware": 100,
       "licenses": 6,
-      "services": 67,
-      "tools": 110,
-      "web": 328,
+      "services": 68,
+      "tools": 113,
+      "web": 329,
       "web-reviewed-source": 2
     },
     "omittedByReason": {
@@ -8292,6 +8350,6 @@
   "secretScan": {
     "blocked": false,
     "findingFiles": 0,
-    "portabilityFiles": 13
+    "portabilityFiles": 14
   }
 }

@@ -6,7 +6,7 @@ Hermes inference, local ASR and ElevenLabs TTS and the authenticated device tran
 from __future__ import annotations
 import asyncio
 import base64
-from contextlib import asynccontextmanager, suppress
+from contextlib import asynccontextmanager, contextmanager, suppress
 import hashlib
 import json
 import logging
@@ -19,11 +19,12 @@ from typing import Literal
 
 import httpx
 from fastapi import FastAPI, Header, HTTPException, Request, Response
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 try:
     from lesson_dialogue import dialogue_reply, daily_reply, explicit_support, lesson_proposal
     from turn_guard import claim_turn
-    from voice_policy import assert_voice_allowed, state_signature, voice_language
+    from voice_policy import assert_voice_allowed, assert_text_allowed, state_signature, voice_language
     from conversation_context import ConversationContext
     from spoken_numbers import spoken_answer, speech_shape
     from lesson_speech import question_narration
@@ -31,7 +32,7 @@ try:
 except ModuleNotFoundError:
     from services.peluqo_education.lesson_dialogue import dialogue_reply, daily_reply, explicit_support, lesson_proposal
     from services.peluqo_education.turn_guard import claim_turn
-    from services.peluqo_education.voice_policy import assert_voice_allowed, state_signature, voice_language
+    from services.peluqo_education.voice_policy import assert_voice_allowed, assert_text_allowed, state_signature, voice_language
     from services.peluqo_education.conversation_context import ConversationContext
     from services.peluqo_education.spoken_numbers import spoken_answer, speech_shape
     from services.peluqo_education.lesson_speech import question_narration
@@ -95,12 +96,23 @@ def authorize(value, key):
         raise HTTPException(401, "unauthorized")
 
 
+@contextmanager
+def inference_slot(interactive):
+    if not INFERENCE_LOCK.acquire(timeout=2 if interactive else 20):
+        raise HTTPException(503, "educational_inference_busy")
+    try:
+        yield
+    finally:
+        INFERENCE_LOCK.release()
+
+
 def model_answer(instructions, content, max_tokens):
     if not MODEL or len(MODEL_KEY) < 32:
         raise HTTPException(503, "educational_hermes_not_configured")
     # Complete prompts are constructed here. There is no stored chat history,
     # no slot restoration, no personal profile, no model tools and no network search.
-    with INFERENCE_LOCK, httpx.Client(timeout=580, follow_redirects=False) as client:
+    interactive = max_tokens <= 300
+    with inference_slot(interactive), httpx.Client(timeout=httpx.Timeout(35, connect=8) if interactive else 580, follow_redirects=False) as client:
         r = client.post(
             MODEL.rstrip("/") + "/chat/completions",
             headers={
@@ -408,6 +420,85 @@ def speak(text, language="es"):
     return bytes(pcm)
 
 
+async def route_education_reply(token, turn_id, question, status, lesson_step, *, channel="voice"):
+    """One educational dialogue policy shared by deliberate voice and text input."""
+    lesson = status.get("localLesson")
+    language = voice_language(status)
+    numeric_answer = None
+    support_offer = None
+    reply_kind = "tutor"
+    try:
+        consent, pending_support = SUPPORT_CONSENT.take(token, question)
+        peer_disclosure = explicit_peer_disclosure(question)
+        log.info("Peluqo support routing: explicit_peer=%d consent=%s family_enabled=%d",
+                 peer_disclosure, consent or "none", family_alerts_enabled(status))
+        if consent == "confirm":
+            CONVERSATIONS.forget(token)
+            delivered = False
+            if family_alerts_enabled(status):
+                try:
+                    receipt = await web("support-signal", token=token, **pending_support,
+                        category="possible_peer_bullying", schoolPeerContext=True, childConfirmed=True)
+                    delivered = receipt.get("accepted") is True and receipt.get("visibleToFamily") is True
+                except (HTTPException, httpx.HTTPError):
+                    # Never claim that a person was contacted or an alert
+                    # exists without the authenticated minimal receipt.
+                    log.warning("Family support notice not confirmed")
+            result = support_reply(language, "sent" if delivered else "unavailable")
+            reply_kind = "support"
+        elif consent == "decline":
+            CONVERSATIONS.forget(token)
+            result = support_reply(language, "declined")
+            reply_kind = "support"
+        elif peer_disclosure:
+            CONVERSATIONS.forget(token)
+            enabled = family_alerts_enabled(status)
+            result = support_reply(language, "offer" if enabled else "support")
+            reply_kind = "support"
+            if enabled:
+                support_offer = {"signalId": turn_id, "source": ("lesson_" if lesson_step is not None else "daily_") + channel}
+        elif lesson is not None and lesson_step is not None and not explicit_support(question) and (numeric_answer := spoken_answer(question)) is not None:
+            a, b = lesson["factors"][lesson_step]
+            correct = numeric_answer == a * b
+            feedback = {
+                "es": ("¡Lo he entendido! Podemos probar con otro ejemplo." if correct else f"Probemos juntos. Hay {a} grupos de {b}. Cuenta los objetos de un grupo y después añade los otros."),
+                "en": ("I understand! We can try another example." if correct else f"Let's try together. There are {a} groups of {b}. Count the objects in one group, then add the other groups."),
+                "pt": ("Já percebi! Podemos experimentar outro exemplo." if correct else f"Vamos tentar juntos. Há {a} grupos de {b}. Conta os objetos de um grupo e depois junta os outros grupos."),
+            }
+            result = {"text": feedback[language], "emotion": "happy" if correct else "encourage"}
+            reply_kind = "spoken-answer"
+        elif lesson is not None and lesson_step is not None:
+            result = await asyncio.to_thread(dialogue_reply, question, lesson, model_answer, language)
+        elif not status.get("sessionId"):
+            reply_kind = "daily"
+            result = await asyncio.to_thread(daily_reply, question, status, CONVERSATIONS.get(token, "daily"), model_answer)
+        else:
+            result = await web("turn", token=token, question=question, requestId=turn_id)
+    except HTTPException as error:
+        if error.status_code not in {502, 503}:
+            raise
+        result = {"text": {"es": UNAVAILABLE_SPEECH, "en": "I can't connect to my voice helper right now. We can continue the downloaded mission and talk again later.", "pt": "Agora não consigo ligar à ajuda de voz. Podemos continuar a missão descarregada e voltar a falar mais tarde."}[language], "emotion": "encourage"}
+        reply_kind = "unavailable"
+    except (httpx.HTTPError, ValueError, KeyError):
+        log.warning("Educational dialogue unavailable")
+        result = {"text": {"es": UNAVAILABLE_SPEECH, "en": "I can't connect to my helper right now. We can continue the downloaded mission.", "pt": "Agora não consigo ligar à ajuda. Podemos continuar a missão descarregada."}[language], "emotion": "encourage"}
+        reply_kind = "unavailable"
+    if reply_kind == "unavailable" and channel == "text":
+        result["text"] = {"es": "Ahora no puedo conectar con mi ayuda de aprendizaje. Puedes continuar la misión descargada y volver a escribir más tarde.",
+                          "en": "I can't connect to my learning helper now. You can continue the downloaded mission and write again later.",
+                          "pt": "Agora não consigo ligar à ajuda de aprendizagem. Podes continuar a missão descarregada e voltar a escrever mais tarde."}[language]
+    return result, reply_kind, numeric_answer, support_offer
+
+
+def accept_education_reply(token, question, result, reply_kind, support_offer, state):
+    if support_offer and family_alerts_enabled(state):
+        SUPPORT_CONSENT.offer(token, support_offer["signalId"], support_offer["source"])
+    if question and (explicit_support(question) or reply_kind == "support"):
+        CONVERSATIONS.forget(token)
+    elif question and reply_kind == "daily":
+        CONVERSATIONS.remember(token, "daily", question, result["text"])
+
+
 @app.post("/v1/education/turn")
 async def turn(
     request: Request,
@@ -457,58 +548,7 @@ async def turn(
             shape = speech_shape(question)
             log.info("Peluqo answer shape: characters=%d words=%d question=%d prefix=%d number_word=%d numeric_match=%d",
                      shape["characters"], shape["words"], shape["question"], shape["answer_prefix"], shape["number_word"], shape["numeric_match"])
-        try:
-            consent, pending_support = SUPPORT_CONSENT.take(token, question)
-            peer_disclosure = explicit_peer_disclosure(question)
-            log.info("Peluqo support routing: explicit_peer=%d consent=%s family_enabled=%d",
-                     peer_disclosure, consent or "none", family_alerts_enabled(status))
-            if consent == "confirm":
-                CONVERSATIONS.forget(token)
-                delivered = False
-                if family_alerts_enabled(status):
-                    try:
-                        receipt = await web("support-signal", token=token, **pending_support,
-                            category="possible_peer_bullying", schoolPeerContext=True, childConfirmed=True)
-                        delivered = receipt.get("accepted") is True and receipt.get("visibleToFamily") is True
-                    except (HTTPException, httpx.HTTPError):
-                        # Never claim that a person was contacted or an alert
-                        # exists without the authenticated minimal receipt.
-                        log.warning("Family support notice not confirmed")
-                result = support_reply(language, "sent" if delivered else "unavailable")
-                reply_kind = "support"
-            elif consent == "decline":
-                CONVERSATIONS.forget(token)
-                result = support_reply(language, "declined")
-                reply_kind = "support"
-            elif peer_disclosure:
-                CONVERSATIONS.forget(token)
-                enabled = family_alerts_enabled(status)
-                result = support_reply(language, "offer" if enabled else "support")
-                reply_kind = "support"
-                if enabled:
-                    support_offer = {"signalId": turn_id, "source": "lesson_voice" if lesson_step is not None else "daily_voice"}
-            elif lesson is not None and lesson_step is not None and not explicit_support(question) and (numeric_answer := spoken_answer(question)) is not None:
-                a, b = lesson["factors"][lesson_step]
-                correct = numeric_answer == a * b
-                feedback = {
-                    "es": ("¡Lo he entendido! Podemos probar con otro ejemplo." if correct else f"Probemos juntos. Hay {a} grupos de {b}. Cuenta los objetos de un grupo y después añade los otros."),
-                    "en": ("I understand! We can try another example." if correct else f"Let's try together. There are {a} groups of {b}. Count the objects in one group, then add the other groups."),
-                    "pt": ("Já percebi! Podemos experimentar outro exemplo." if correct else f"Vamos tentar juntos. Há {a} grupos de {b}. Conta os objetos de um grupo e depois junta os outros grupos."),
-                }
-                result = {"text": feedback[language], "emotion": "happy" if correct else "encourage"}
-                reply_kind = "spoken-answer"
-            elif lesson is not None and lesson_step is not None:
-                result = await asyncio.to_thread(dialogue_reply, question, lesson, model_answer, language)
-            elif not status.get("sessionId"):
-                reply_kind = "daily"
-                result = await asyncio.to_thread(daily_reply, question, status, CONVERSATIONS.get(token, "daily"), model_answer)
-            else:
-                result = await web("turn", token=token, question=question, requestId=turn_id)
-        except HTTPException as error:
-            if error.status_code != 503:
-                raise
-            result = {"text": {"es": UNAVAILABLE_SPEECH, "en": "I can't connect to my voice helper right now. We can continue the downloaded mission and talk again later.", "pt": "Agora não consigo ligar à ajuda de voz. Podemos continuar a missão descarregada e voltar a falar mais tarde."}[language], "emotion": "encourage"}
-            reply_kind = "unavailable"
+        result, reply_kind, numeric_answer, support_offer = await route_education_reply(token, turn_id, question, status, lesson_step)
     try:
         audio = await asyncio.to_thread(speak, result["text"]) if language == "es" else await asyncio.to_thread(speak, result["text"], language)
     except httpx.HTTPError as error:
@@ -518,12 +558,7 @@ async def turn(
     assert_voice_allowed(check)
     if state_signature(check) != state_signature(status):
         raise HTTPException(409, "session_changed")
-    if support_offer and family_alerts_enabled(check):
-        SUPPORT_CONSENT.offer(token, support_offer["signalId"], support_offer["source"])
-    if question and explicit_support(question):
-        CONVERSATIONS.forget(token)
-    elif question and reply_kind == "daily":
-        CONVERSATIONS.remember(token, "daily", question, result["text"])
+    accept_education_reply(token, question, result, reply_kind, support_offer, check)
     return Response(
         audio,
         media_type="application/octet-stream",
@@ -541,6 +576,49 @@ async def turn(
             "Cache-Control": "no-store",
         },
     )
+
+
+class TextTurn(BaseModel):
+    model_config = {"extra": "forbid"}
+    requestId: UUID
+    question: str = Field(min_length=1, max_length=500)
+    lessonId: UUID | None = None
+    step: int | None = Field(default=None, ge=0, le=4, strict=True)
+
+
+TextTurn.model_rebuild(_types_namespace=globals())
+
+
+@app.post("/v1/education/text")
+async def text_turn(body: TextTurn, authorization: str = Header(default="")):
+    """Accessible conversation with no microphone, ASR or paid speech synthesis."""
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(401, "paired_device_required")
+    token = authorization.removeprefix("Bearer ")
+    question = body.question.strip()
+    if not question or any(ord(char) < 32 and char not in "\n\t" for char in question):
+        raise HTTPException(400, "invalid_educational_question")
+    status = await web("events", token=token)
+    if not status.get("deviceId"):
+        raise HTTPException(401, "paired_device_required")
+    assert_text_allowed(status)
+    lesson = status.get("localLesson")
+    if (body.lessonId is None) != (body.step is None):
+        raise HTTPException(400, "invalid_spoken_lesson_context")
+    if body.lessonId is not None and (not lesson or str(body.lessonId) != lesson.get("id") or body.step >= len(lesson.get("factors", []))):
+        raise HTTPException(409, "spoken_lesson_changed")
+    identity = str(body.requestId)
+    await asyncio.to_thread(claim_turn, token, identity)
+    result, kind, answer, offer = await route_education_reply(token, identity, question, status, body.step, channel="text")
+    check = await web("events", token=token)
+    assert_text_allowed(check)
+    if state_signature(check) != state_signature(status):
+        raise HTTPException(409, "session_changed")
+    accept_education_reply(token, question, result, kind, offer, check)
+    reply = {"text": result["text"], "emotion": result["emotion"], "kind": kind, "channel": "text"}
+    if answer is not None:
+        reply.update(answer=answer, lessonId=lesson["id"], step=body.step)
+    return JSONResponse(reply, headers={"Cache-Control": "no-store"})
 
 
 @app.post("/v1/education/say")

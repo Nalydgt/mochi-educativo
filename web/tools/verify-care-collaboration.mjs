@@ -139,6 +139,25 @@ try {
         visibleToFamily: true,
       });
       await expectCode(() => ingest(anotherDevice, signalId), "23505");
+      for (const source of ["daily_text", "lesson_text"]) {
+        const textSignal = randomUUID();
+        await expectCode(() => ingest(deviceId, textSignal, source, false), "22023");
+        assert.equal((await ingest(deviceId, textSignal, source)).visibleToFamily, true);
+        const entry = (await snapshot(familyId)).careAlerts.find((item) => item.id === textSignal);
+        assert.ok(entry);
+        assert.deepEqual(Object.keys(entry).sort(), [
+          "category",
+          "createdAt",
+          "id",
+          "learnerId",
+          "reviewedAt",
+          "status",
+        ]);
+        assert.equal(JSON.stringify(await snapshot(teacherId)).includes(textSignal), false);
+      }
+      checks.push(
+        "Written disclosures preserve child confirmation, minimal family-only notices and teacher exclusion",
+      );
       state = (await q`select education.device_school_context(${first},${teacherId}) as result`)[0]
         .result;
       assert.equal(state.deviceSettings.reminderMinutes, 15);
@@ -218,6 +237,7 @@ try {
       assert.equal(state.deviceSettings.reminderMinutes, null);
       assert.equal(state.deviceSettings.familySupportAlertsEnabled, false);
       await expectCode(() => ingest(deviceId, randomUUID()), "42501");
+      await expectCode(() => ingest(deviceId, randomUUID(), "daily_text"), "42501");
       checks.push(
         "Parents disable reminders/alerts without changing daily limit; old retries cannot restore previous consent",
       );

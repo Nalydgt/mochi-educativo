@@ -15,6 +15,7 @@
 #include "mochi_lessons.h"
 #include "mochi_lesson_scene.h"
 #include "mochi_education_policy.h"
+#include "mochi_education_text.h"
 #include "nvs.h"
 #include "psa/crypto.h"
 #include <stdatomic.h>
@@ -43,6 +44,16 @@ static atomic_bool reaction_pending;
 static atomic_bool online;
 static lv_obj_t *screen, *name_label, *status_label, *code_label, *panel, *pin, *keyboard,
     *pin_hint;
+static lv_obj_t *adult_title;
+static unsigned adult_action;
+static const char *const pin_keys[] = {
+    "1", "2", "3", "\n", "4", "5", "6", "\n", "7", "8", "9", "\n",
+    LV_SYMBOL_BACKSPACE, "0", LV_SYMBOL_OK, ""
+};
+static const lv_buttonmatrix_ctrl_t pin_key_controls[] = {
+    1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1 | LV_BUTTONMATRIX_CTRL_NO_REPEAT, 1, 1 | LV_BUTTONMATRIX_CTRL_NO_REPEAT
+};
 static lv_obj_t *conversation_panel, *conversation_scroll, *conversation_label;
 static char *conversation_text;
 static atomic_bool conversation_open;
@@ -143,7 +154,7 @@ static bool same(const char *a, const char *b) {
 }
 bool mochi_education_active(void) { return atomic_load(&active); }
 bool mochi_education_blocked(void) {
-    return mochi_education_active() && (options_open || atomic_load(&quick_page) != QUICK_CLOSED ||
+    return mochi_education_active() && (mochi_education_text_active() || options_open || atomic_load(&quick_page) != QUICK_CLOSED ||
         (mochi_lessons_interacting() && !mochi_lessons_voice_passthrough() &&
          !mochi_runtime_education_narrating()));
 }
@@ -498,6 +509,30 @@ static void back(lv_event_t *e) {
     options_open = false;
     lv_obj_add_flag(panel, LV_OBJ_FLAG_HIDDEN);
 }
+static void confirm_adult(lv_event_t *event) {
+    if (adult_action == 1) unlock(event);
+    else if (adult_action == 2) renew(event);
+}
+static void open_adult(unsigned action) {
+    if (action != 1 && action != 2) return;
+    mochi_voice_cancel();
+    quick_show(QUICK_CLOSED);
+    adult_action = action;
+    options_open = true;
+    lv_textarea_set_text(pin, "");
+    lv_label_set_text(pin_hint, "");
+    lv_label_set_text(adult_title, action == 1 ? "Volver al modo personal" : "Renovar vínculo");
+    lv_obj_remove_flag(panel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_move_foreground(panel);
+    mochi_display_activity();
+}
+static void adult_selection(lv_event_t *event) {
+    lv_obj_t *dropdown = lv_event_get_target_obj(event);
+    unsigned selected = lv_dropdown_get_selected(dropdown);
+    lv_dropdown_close(dropdown);
+    lv_dropdown_set_selected(dropdown, 0);
+    open_adult(selected);
+}
 static lv_obj_t *button(lv_obj_t *parent, const char *value, int y, lv_event_cb_t cb) {
     lv_obj_t *b = lv_button_create(parent);
     lv_obj_set_size(b, 220, 42);
@@ -550,17 +585,16 @@ static void quick_action(lv_event_t *event) {
         quick_show(QUICK_CLOSED);
     else if (action == 1)
         quick_show(QUICK_SOUND);
-    else if (action == 2) {
-        quick_show(QUICK_CLOSED);
-        options_open = true;
-        lv_textarea_set_text(pin, "");
-        lv_label_set_text(pin_hint, "");
-        lv_obj_remove_flag(panel, LV_OBJ_FLAG_HIDDEN);
-        lv_obj_move_foreground(panel);
-    } else if (action == 3)
+    else if (action == 2)
+        open_adult(1);
+    else if (action == 3)
         quick_show(QUICK_HOME);
     else if (action == 7)
         mochi_education_options();
+    else if (action == 8) {
+        quick_show(QUICK_CLOSED);
+        mochi_education_text_show();
+    }
     else if (action >= 4 && action <= 6) {
         int volume = mochi_audio_get_volume();
         if (volume > 0)
@@ -607,11 +641,32 @@ static void create_quick_menu(void) {
         lv_obj_set_size(pages[i], 466, 466);
         lv_obj_remove_flag(pages[i], LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);
     }
-    lv_obj_t *title = label(quick_home, "Nuestro menú", 94, 280);
+    lv_obj_t *title = label(quick_home, "Nuestro menú", 74, 280);
     lv_obj_set_style_text_font(title, &mochi_font_20, 0);
-    label(quick_home, "Ajustes sencillos", 130, 280);
+    lv_obj_t *intro = label(quick_home, "También puedes escribir", 104, 280);
+    lv_obj_set_style_text_font(intro, &mochi_font_14, 0);
+    quick_button(quick_home, "Escribir", 0, 124, 230, 8);
     quick_button(quick_home, "Sonido", 0, 184, 230, 1);
-    quick_button(quick_home, "Controles del adulto", 0, 244, 230, 2);
+    lv_obj_t *adult_dropdown = lv_dropdown_create(quick_home);
+    lv_obj_set_size(adult_dropdown, 230, 48);
+    lv_obj_align(adult_dropdown, LV_ALIGN_TOP_MID, 0, 244);
+    lv_dropdown_set_options(adult_dropdown, "Opciones de adulto\nVolver al modo personal\nRenovar vínculo");
+    lv_dropdown_set_text(adult_dropdown, "Opciones de adulto");
+    lv_dropdown_set_dir(adult_dropdown, LV_DIR_TOP);
+    lv_obj_set_style_bg_color(adult_dropdown, lv_color_hex(0x18362E), 0);
+    lv_obj_set_style_text_color(adult_dropdown, lv_color_hex(0xE4EBE3), 0);
+    lv_obj_set_style_text_font(adult_dropdown, &mochi_font_16, 0);
+    lv_obj_set_style_border_color(adult_dropdown, lv_color_hex(0x6CA888), 0);
+    lv_obj_set_style_border_width(adult_dropdown, 1, 0);
+    lv_obj_set_style_radius(adult_dropdown, 14, 0);
+    lv_obj_set_style_shadow_width(adult_dropdown, 0, 0);
+    lv_obj_t *adult_list = lv_dropdown_get_list(adult_dropdown);
+    lv_obj_set_style_bg_color(adult_list, lv_color_black(), 0);
+    lv_obj_set_style_bg_color(adult_list, lv_color_hex(0x234538), LV_PART_SELECTED);
+    lv_obj_set_style_text_color(adult_list, lv_color_hex(0xE4EBE3), 0);
+    lv_obj_set_style_text_color(adult_list, lv_color_hex(0xE4EBE3), LV_PART_SELECTED);
+    lv_obj_set_style_text_font(adult_list, &mochi_font_16, 0);
+    lv_obj_add_event_cb(adult_dropdown, adult_selection, LV_EVENT_VALUE_CHANGED, NULL);
     lv_obj_t *identity = label(quick_home, "Soy un compañero de IA.\nPuedo equivocarme.", 308, 280);
     lv_obj_set_style_text_font(identity, &mochi_font_14, 0);
     quick_button(quick_home, "Volver", 0, 366, 180, 0);
@@ -717,11 +772,12 @@ static void tick(lv_timer_t *timer) {
     static bool engaged_before;
     /* Screen time includes the home, reading and sound screens too. A sleeping
      * display consumes no allowance; active voice remains an educational use. */
-    bool engaged = mochi_education_active() && (mochi_display_awake() || mochi_voice_busy());
+    bool engaged = mochi_education_active() && (mochi_display_awake() || mochi_voice_busy() || mochi_education_text_busy());
     mochi_education_policy_tick(engaged);
     if (engaged_before && !engaged)
         mochi_education_policy_flush();
     engaged_before = engaged;
+    mochi_education_text_tick(mochi_education_active());
     if (!mochi_education_active()) {
         if (atomic_exchange(&conversation_open, false)) {
             xSemaphoreTake(mutex, portMAX_DELAY);
@@ -737,7 +793,7 @@ static void tick(lv_timer_t *timer) {
         return;
     }
     lv_obj_remove_flag(screen, LV_OBJ_FLAG_HIDDEN);
-    bool covered = options_open || atomic_load(&quick_page) != QUICK_CLOSED;
+    bool covered = mochi_education_text_active() || options_open || atomic_load(&quick_page) != QUICK_CLOSED;
     mochi_lessons_tick(!covered);
     conversation_tick(!covered);
     bool lesson_open = mochi_lessons_interacting() && !covered;
@@ -811,6 +867,7 @@ void mochi_education_create(lv_obj_t *parent) {
     lv_obj_set_style_bg_opa(screen, LV_OPA_TRANSP, 0);
     // Leave the original touch surface and settings button reachable.
     lv_obj_remove_flag(screen, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_CLICKABLE);
+    quick_button(screen, "Escribir", -104, 59, 100, 8);
     name_label = label(screen, "Nuestro rincón", 88, 260);
     lv_obj_set_style_text_font(name_label, &mochi_font_14, 0);
     lv_obj_set_height(name_label, 20);
@@ -865,25 +922,54 @@ void mochi_education_create(lv_obj_t *parent) {
     lv_obj_set_style_bg_color(panel, lv_color_black(), 0);
     lv_obj_set_style_bg_opa(panel, LV_OPA_COVER, 0);
     lv_obj_remove_flag(panel, LV_OBJ_FLAG_SCROLLABLE);
-    label(panel, "Opciones del adulto", 63, 260);
-    pin_hint = label(panel, "", 85, 300);
+    adult_title = label(panel, "Opciones de adulto", 52, 260);
+    pin_hint = label(panel, "", 337, 270);
     lv_obj_set_style_text_font(pin_hint, &mochi_font_14, 0);
     pin = lv_textarea_create(panel);
-    lv_obj_set_size(pin, 260, 45);
-    lv_obj_align(pin, LV_ALIGN_TOP_MID, 0, 105);
+    lv_obj_set_size(pin, 230, 42);
+    lv_obj_align(pin, LV_ALIGN_TOP_MID, 0, 86);
     lv_textarea_set_one_line(pin, true);
     lv_textarea_set_password_mode(pin, true);
-    lv_textarea_set_max_length(pin, 64);
+    lv_textarea_set_max_length(pin, 12);
+    lv_textarea_set_accepted_chars(pin, "0123456789");
+    lv_textarea_set_placeholder_text(pin, "PIN de adulto");
     lv_obj_set_style_text_font(pin, &mochi_font_16, 0);
+    lv_obj_set_style_text_color(pin, lv_color_hex(0xE4EBE3), 0);
+    lv_obj_set_style_text_color(pin, lv_color_hex(0xC2C9C4), LV_PART_TEXTAREA_PLACEHOLDER);
+    lv_obj_set_style_bg_color(pin, lv_color_hex(0x101010), 0);
+    lv_obj_set_style_border_color(pin, lv_color_hex(0x484848), 0);
     keyboard = lv_keyboard_create(panel);
-    lv_obj_set_size(keyboard, 330, 124);
-    lv_obj_align(keyboard, LV_ALIGN_TOP_MID, 0, 155);
+    lv_obj_set_size(keyboard, 286, 196);
+    lv_obj_center(keyboard);
     lv_keyboard_set_textarea(keyboard, pin);
+    lv_keyboard_set_map(keyboard, LV_KEYBOARD_MODE_NUMBER, pin_keys, pin_key_controls);
     lv_keyboard_set_mode(keyboard, LV_KEYBOARD_MODE_NUMBER);
-    button(panel, "Volver a Mochi", 290, unlock);
-    button(panel, "Renovar vinculo", 338, renew);
-    button(panel, "Seguir aprendiendo", 386, back);
+    lv_obj_set_style_bg_color(keyboard, lv_color_black(), 0);
+    lv_obj_set_style_bg_opa(keyboard, LV_OPA_COVER, 0);
+    lv_obj_set_style_border_width(keyboard, 0, 0);
+    lv_obj_set_style_pad_all(keyboard, 0, 0);
+    lv_obj_set_style_pad_row(keyboard, 6, 0);
+    lv_obj_set_style_pad_column(keyboard, 6, 0);
+    lv_obj_set_style_bg_color(keyboard, lv_color_hex(0x101010), LV_PART_ITEMS);
+    lv_obj_set_style_bg_color(keyboard, lv_color_hex(0x2B2B2B), LV_PART_ITEMS | LV_STATE_PRESSED);
+    lv_obj_set_style_text_color(keyboard, lv_color_hex(0xE4EBE3), LV_PART_ITEMS);
+    lv_obj_set_style_text_font(keyboard, &mochi_font_20, LV_PART_ITEMS);
+    lv_obj_set_style_border_color(keyboard, lv_color_hex(0x484848), LV_PART_ITEMS);
+    lv_obj_set_style_radius(keyboard, 12, LV_PART_ITEMS);
+    lv_obj_set_style_shadow_width(keyboard, 0, LV_PART_ITEMS);
+    lv_obj_add_event_cb(keyboard, confirm_adult, LV_EVENT_READY, NULL);
+    lv_obj_t *confirm = button(panel, "Confirmar", 372, confirm_adult);
+    lv_obj_t *cancel = button(panel, "Cancelar", 372, back);
+    lv_obj_set_size(confirm, 132, 44);
+    lv_obj_align(confirm, LV_ALIGN_TOP_MID, -73, 372);
+    lv_obj_set_size(cancel, 132, 44);
+    lv_obj_align(cancel, LV_ALIGN_TOP_MID, 73, 372);
+    lv_obj_set_width(lv_obj_get_child(confirm, 0), 120);
+    lv_obj_set_width(lv_obj_get_child(cancel, 0), 120);
+    lv_obj_set_style_bg_color(confirm, lv_color_hex(0x101010), 0);
+    lv_obj_set_style_bg_color(cancel, lv_color_hex(0x101010), 0);
     lv_obj_add_flag(panel, LV_OBJ_FLAG_HIDDEN);
+    mochi_education_text_create(screen);
     create_reminder_toast();
     lv_obj_add_flag(screen, LV_OBJ_FLAG_HIDDEN);
     lv_timer_create(tick, 50, NULL);

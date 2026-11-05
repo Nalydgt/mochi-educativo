@@ -1,5 +1,6 @@
 #include "mochi_runtime.h"
 #include "mochi_education.h"
+#include "mochi_education_text.h"
 #include "mochi_lessons.h"
 #include "mochi.h"
 #include "mochi_animation.h"
@@ -1456,27 +1457,42 @@ static void check_server_audio(void)
 const char *mochi_runtime_device_id(void) { return device_id; }
 /* Dedicated educational transport, always using the configured VPN interface.
  * Never falls back to the personal bearer token or sends GPS/context headers. */
+static bool request_budget(esp_http_client_handle_t client,int64_t deadline,unsigned maximum_ms);
 esp_err_t mochi_runtime_education_json(const char *base,const char *token,const char *route,const char *json,
                                       char *output,size_t capacity,int *status)
 {
     if(status)*status=0;
     if(!server_network_ready() || !mochi_education_active() || !base || !token || !route || !output || capacity<2)return ESP_ERR_INVALID_STATE;
     char url[480],authorization[112];snprintf(url,sizeof(url),"%s%s",base,route);snprintf(authorization,sizeof(authorization),"Bearer %s",token);
+    bool text_turn = !strcmp(route,"/v1/education/text");
+    int64_t deadline=esp_timer_get_time()+(text_turn?45000000LL:5000000LL);
     esp_http_client_config_t options={.url=url,.method=HTTP_METHOD_POST,.timeout_ms=5000,.crt_bundle_attach=esp_crt_bundle_attach,.disable_auto_redirect=true,.buffer_size=1024};
     struct ifreq interface;
     if(!bind_server_transport(&options,&interface)){secure_zero(authorization,sizeof(authorization));return ESP_ERR_INVALID_STATE;}
     esp_http_client_handle_t client=esp_http_client_init(&options);if(!client){secure_zero(authorization,sizeof(authorization));return ESP_ERR_NO_MEM;}
     esp_http_client_set_header(client,"Authorization",authorization);esp_http_client_set_header(client,"Content-Type","application/json");
     size_t length=json?strlen(json):2;const char *body=json?json:"{}";esp_err_t result=esp_http_client_open(client,length);size_t used=0;
-    for(size_t sent=0;result==ESP_OK&&sent<length;){int count=esp_http_client_write(client,body+sent,length-sent);if(count<=0)result=ESP_FAIL;else sent+=count;}
-    if(result==ESP_OK && esp_http_client_fetch_headers(client)<0)result=ESP_FAIL;
+    for(size_t sent=0;result==ESP_OK&&sent<length;){
+        if(text_turn && (!mochi_education_text_active() || !request_budget(client,deadline,1000))){result=ESP_ERR_INVALID_STATE;break;}
+        int count=esp_http_client_write(client,body+sent,length-sent);if(count<=0)result=ESP_FAIL;else sent+=count;
+    }
+    if(result==ESP_OK && text_turn) {
+        while (true) {
+            if(!mochi_education_text_active() || !mochi_education_practice_allowed() || !request_budget(client,deadline,500)) {result=ESP_ERR_INVALID_STATE;break;}
+            int64_t headers=esp_http_client_fetch_headers(client);
+            if(headers>=0)break;
+            if(headers!=-ESP_ERR_HTTP_EAGAIN){result=ESP_FAIL;break;}
+        }
+    } else if(result==ESP_OK && esp_http_client_fetch_headers(client)<0)result=ESP_FAIL;
     if(status)*status=esp_http_client_get_status_code(client);
     /* Read buffered body bytes even when fetch_headers already parsed the
      * complete short response in the same TCP packet. */
     while(result==ESP_OK){
         if(!mochi_education_active()){result=ESP_ERR_INVALID_STATE;break;}
+        if(text_turn && (!mochi_education_text_active() || !mochi_education_practice_allowed() || !request_budget(client,deadline,1000))){result=ESP_ERR_INVALID_STATE;break;}
         if(used+1>=capacity){result=ESP_ERR_INVALID_SIZE;break;}
         int count=esp_http_client_read(client,output+used,capacity-used-1);
+        if(count==-ESP_ERR_HTTP_EAGAIN && text_turn)continue;
         if(count<0){result=ESP_FAIL;break;}if(count==0)break;used+=count;
         if(esp_http_client_is_complete_data_received(client))break;
     }

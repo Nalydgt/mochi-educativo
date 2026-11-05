@@ -80,6 +80,8 @@ describe("adult school command boundaries", () => {
     };
     expect(supportSignalSchema.safeParse(signal).success).toBe(true);
     expect(supportSignalSchema.safeParse({ ...signal, source: "lesson_voice" }).success).toBe(true);
+    expect(supportSignalSchema.safeParse({ ...signal, source: "daily_text" }).success).toBe(true);
+    expect(supportSignalSchema.safeParse({ ...signal, source: "lesson_text" }).success).toBe(true);
     for (const unsafe of [
       { source: "family_harm" },
       { childConfirmed: false },

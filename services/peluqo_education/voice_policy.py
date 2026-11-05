@@ -13,11 +13,11 @@ def voice_language(state: dict) -> str:
     return language
 
 
-def assert_voice_allowed(state: dict, *, now: datetime | None = None):
+def assert_interaction_allowed(state: dict, *, voice: bool, now: datetime | None = None):
     settings = state.get("deviceSettings")
     if not isinstance(settings, dict):
         return  # Backward-compatible transport before the first policy sync.
-    if settings.get("voiceEnabled") is False:
+    if voice and settings.get("voiceEnabled") is False:
         raise HTTPException(403, "voice_disabled_by_adult")
     start, end = settings.get("startTime", "00:00"), settings.get("endTime", "00:00")
     def minutes(value):
@@ -38,6 +38,15 @@ def assert_voice_allowed(state: dict, *, now: datetime | None = None):
     if not allowed:
         raise HTTPException(403, "outside_authorized_schedule")
     voice_language(state)
+
+
+def assert_voice_allowed(state: dict, *, now: datetime | None = None):
+    assert_interaction_allowed(state, voice=True, now=now)
+
+
+def assert_text_allowed(state: dict, *, now: datetime | None = None):
+    """Text keeps the adult's schedule without requiring microphone permission."""
+    assert_interaction_allowed(state, voice=False, now=now)
 
 
 def state_signature(state: dict):

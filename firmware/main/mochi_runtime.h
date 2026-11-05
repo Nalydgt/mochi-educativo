@@ -57,3 +57,6 @@ bool mochi_runtime_trusted_channel(void);
 bool mochi_runtime_education_cue(const char *cue);
 /* Audio owner of an approved question/cue; never opens the microphone. */
 bool mochi_runtime_education_narrating(void);
+/* Separate paired education transport; never uses the personal identity. */
+esp_err_t mochi_runtime_education_json(const char *base, const char *token, const char *route,
+                                     const char *json, char *output, size_t capacity, int *status);

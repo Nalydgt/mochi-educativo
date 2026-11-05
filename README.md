@@ -1,7 +1,7 @@
 # MOCHI educativo conectado
 
 Fuentes de un prototipo privado para uso personal y demostraciones. Versión
-declarada por el firmware al exportar: **0.15.0-mochi-product**. Esto identifica
+declarada por el firmware al exportar: **0.16.0-mochi-product**. Esto identifica
 el código, no acredita qué versión está instalada en una placa.
 
 El niño practica en un Mochi físico con pantalla circular de 466 × 466. La web
@@ -10,6 +10,11 @@ y [panel familiar](https://peluqo-mundos.vercel.app/familia). Los enlaces requie
 cuentas autorizadas; el repositorio no incluye sus credenciales.
 
 ## Qué contiene
+
+La revisión 0.16 incorpora **Escribir** como alternativa opcional en el Mochi.
+Permite conversar por texto sin micrófono ni síntesis de voz. La voz sigue
+siendo el modo principal. El firmware se ha compilado; su instalación y prueba
+táctil están pendientes. El servicio de texto está desplegado y verificado.
 
 - `firmware/`: ESP32-S3, LVGL, voz/I2S, conectividad, preferencias, escenas y
   motor de multiplicaciones descargadas. Conserva Coucou por elección del

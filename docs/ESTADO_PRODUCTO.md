@@ -1,7 +1,7 @@
 # Estado y alcance del producto
 
 Revisión curada: 6 de noviembre de 2026. Versión declarada por estas fuentes:
-`0.15.0-mochi-product`. Este documento distingue implementación, pruebas de
+`0.16.0-mochi-product`. Este documento distingue implementación, pruebas de
 código y comportamiento que todavía debe comprobarse en hardware. No declara
 terminado todo el producto por haber compilado o publicado un panel.
 
@@ -33,6 +33,12 @@ del snapshot docente. Los registros ficticios se eliminaron después. Esta
 prueba de servicio no sustituye el recorrido acústico ni valida su eficacia.
 
 ## Trabajo y comprobaciones pendientes
+
+El código 0.16 añade «Escribir» como opción adicional. Sus permisos, contexto
+efímero, horarios y avisos familiares se comparten con voz; no requiere ASR/TTS.
+Servicio y compilación verificados. Instalación y aceptación táctil pendientes.
+Los ajustes adultos usan un desplegable; el PIN acepta sólo dígitos y muestra
+un teclado negro centrado, conservando la comprobación y el límite de intentos.
 
 - **Más tipos de actividad.** El motor físico actual trabaja multiplicaciones.
   El alcance original también pide respuestas abiertas, explicación oral,

@@ -11,6 +11,11 @@ cuentas autorizadas; el repositorio no incluye sus credenciales.
 
 ## Qué contiene
 
+La revisión 0.16 incorpora **Escribir** como alternativa opcional en el Mochi.
+Permite conversar por texto sin micrófono ni síntesis de voz. La voz sigue
+siendo el modo principal. El firmware se ha compilado; su instalación y prueba
+táctil están pendientes. El servicio de texto está desplegado y verificado.
+
 - `firmware/`: ESP32-S3, LVGL, voz/I2S, conectividad, preferencias, escenas y
   motor de multiplicaciones descargadas. Conserva Coucou por elección del
   propietario para uso personal y demostraciones.

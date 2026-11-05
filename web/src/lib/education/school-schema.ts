@@ -56,7 +56,7 @@ export const supportSignalSchema = z
     action: z.literal("support-signal"),
     signalId: identity,
     category: z.literal("possible_peer_bullying"),
-    source: z.enum(["daily_voice", "lesson_voice"]),
+    source: z.enum(["daily_voice", "lesson_voice", "daily_text", "lesson_text"]),
     schoolPeerContext: z.literal(true),
     childConfirmed: z.literal(true),
   })

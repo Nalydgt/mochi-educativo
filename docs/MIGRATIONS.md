@@ -34,6 +34,8 @@ preparado, el bloque actual requiere este orden relativo:
 9. `education-school-product.sql`.
 10. `education-adult-role-hardening.sql`.
 11. `education-care-collaboration.sql`.
+12. `web/supabase/migrations/20261105232924_mochi_text_conversation.sql`, después
+    del bloque anterior; admite origen escrito conservando permisos y retención.
 
 Los demás scripts conservados corresponden a funcionalidades o ampliaciones
 anteriores. No se ofrece un comando que aplique todo automáticamente porque

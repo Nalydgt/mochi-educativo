@@ -41,22 +41,29 @@ def pcm(path):
 
 
 def caption(reply):
+    if reply.headers.get("content-type", "").startswith("application/json"):
+        return reply.json().get("text", "")
     encoded = "".join(reply.headers.get("x-mochi-caption-" + str(i), "") for i in range(1, 5))
     return base64.b64decode(encoded).decode("utf-8")
+
+
+def kind(reply):
+    return reply.json().get("kind") if reply.headers.get("content-type", "").startswith("application/json") else reply.headers.get("x-mochi-education-reply")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--web", default="https://peluqo-mundos.vercel.app")
     parser.add_argument("--connector", default="http://127.0.0.1:54321")
+    parser.add_argument("--text", action="store_true", help="Use the accessible typed route, without ASR or TTS")
     args = parser.parse_args()
     device, cloud = read("mochi-education-device.json"), read("cloud-public.json")
     identity = str(uuid4())
-    private = ROOT / ".runtime/mochi-family-support-live.json"
+    private = ROOT / (".runtime/mochi-text-family-support-live.json" if args.text else ".runtime/mochi-family-support-live.json")
     report = {"passed": False, "data": "fictional_demonstration", "signalId": identity,
               "syntheticInput": True, "childAudioRecorded": False, "audioPlayed": False,
               "transcriptPublished": False, "externalNotificationsSent": False,
-              "cleanupRequired": True}
+              "cleanupRequired": True, "inputMode": "text" if args.text else "synthetic_voice"}
     private.write_text(json.dumps(report, indent=2), encoding="utf-8")
     try:
         with httpx.Client(timeout=150, follow_redirects=False) as client:
@@ -68,17 +75,21 @@ def main():
             settings = next(item for item in before["settings"] if item["learnerId"] == learner["id"])
             assert settings.get("familySupportAlertsEnabled") is True, "Enable consent in the demo family's actual settings first"
             headers = {"Authorization": "Bearer " + device["token"], "X-Mochi-Turn-ID": identity}
-            offer = client.post(args.connector + "/v1/education/turn", headers=headers,
-                content=pcm(ROOT / ".runtime/education-support-peer.wav"))
-            report.update(offerHttp=offer.status_code, offerKind=offer.headers.get("x-mochi-education-reply"))
-            assert offer.status_code == 200 and offer.headers.get("x-mochi-education-reply") == "support", "Synthetic disclosure was not recognized"
+            offer = (client.post(args.connector + "/v1/education/text", headers=headers,
+                json={"requestId": identity, "question": "En el colegio mis compañeros me insultan."}) if args.text else
+                client.post(args.connector + "/v1/education/turn", headers=headers,
+                content=pcm(ROOT / ".runtime/education-support-peer.wav")))
+            report.update(offerHttp=offer.status_code, offerKind=kind(offer))
+            assert offer.status_code == 200 and kind(offer) == "support", "Synthetic disclosure was not recognized"
             assert "¿Quieres" in caption(offer), "The child must be offered a choice before any notice"
             intermediate = snapshot(client, args.web, family)
             assert all(item["id"] != identity for item in intermediate.get("careAlerts", [])), "Notice was created before child confirmation"
             headers["X-Mochi-Turn-ID"] = str(uuid4())
-            confirmation = client.post(args.connector + "/v1/education/turn", headers=headers,
-                content=pcm(ROOT / ".runtime/education-support-confirm.wav"))
-            report.update(confirmationHttp=confirmation.status_code, confirmationKind=confirmation.headers.get("x-mochi-education-reply"))
+            confirmation = (client.post(args.connector + "/v1/education/text", headers=headers,
+                json={"requestId": str(uuid4()), "question": "Sí, avisa a mi familia."}) if args.text else
+                client.post(args.connector + "/v1/education/turn", headers=headers,
+                content=pcm(ROOT / ".runtime/education-support-confirm.wav")))
+            report.update(confirmationHttp=confirmation.status_code, confirmationKind=kind(confirmation))
             assert confirmation.status_code == 200 and "He dejado un aviso" in caption(confirmation), "The minimal notice was not confirmed"
             after = snapshot(client, args.web, family)
             alert = next(item for item in after.get("careAlerts", []) if item["id"] == identity)
@@ -88,11 +99,12 @@ def main():
             assert "careAlerts" not in teacher_view and identity not in json.dumps(teacher_view), "Teacher received private accompaniment data"
             report.update(passed=True, offeredBeforeConfirmation=True, minimalFamilyNoticeVisible=True,
                           teacherCannotSeeNotice=True, rawConversationShared=False,
-                          source="real_asr_tts_and_authenticated_school_api")
+                          source="real_text_and_authenticated_school_api" if args.text else "real_asr_tts_and_authenticated_school_api")
     finally:
         private.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     public = {key: value for key, value in report.items() if key != "signalId"}
-    (ROOT / "docs/mediciones/20261105-mochi-family-support-live.json").write_text(json.dumps(public, indent=2) + "\n", encoding="utf-8")
+    public_path = "docs/mediciones/20261106-mochi-text-support-live.json" if args.text else "docs/mediciones/20261105-mochi-family-support-live.json"
+    (ROOT / public_path).write_text(json.dumps(public, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(public))
 
 

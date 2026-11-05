@@ -40,6 +40,14 @@ físico, eficacia de detección o una prueba completa de los controles de 0.15.0
 
 ## Qué se puede reproducir sin datos del operador
 
+La ampliación 0.16 pasó 117 pruebas del conector, 48 de herramientas y siete
+grupos contra Postgres real con rollback. Dos turnos escritos con el modelo
+real devolvieron respuestas completas sin audio. El recorrido de acompañamiento
+por texto verificó oferta, confirmación, aviso mínimo familiar y exclusión del
+profesor; el aviso ficticio se eliminó y quedaron cero filas asociadas. La
+compilación ESP-IDF de 0.16 cabe en la partición de 4 MiB. Estas comprobaciones
+no acreditan instalación ni interacción táctil en una placa.
+
 - Pruebas frontend y TypeScript mediante `npm test` y `npx tsc --noEmit` en `web/`.
 - Pruebas del conector con fixtures generadas en memoria o directorios temporales.
 - Compilación ESP-IDF con versiones declaradas y recursos de arte incluidos.
